@@ -25,10 +25,10 @@ keymap.set('i', '<C-s>', "<Esc><Cmd>w<CR>a")
 keymap.set('n', '<C-s>', "<Cmd>w<CR>")
 
 -- Quick window navigation
-keymap.set('n', '<C-h>', "<Cmd>wincmd h<CR>")
-keymap.set('n', '<C-j>', "<Cmd>wincmd j<CR>")
-keymap.set('n', '<C-k>', "<Cmd>wincmd k<CR>")
-keymap.set('n', '<C-l>', "<Cmd>wincmd l<CR>")
+keymap.set('n', '<C-h>', "<Cmd>wincmd h<CR>", {silent = true})
+keymap.set('n', '<C-j>', "<Cmd>wincmd j<CR>", {silent = true})
+keymap.set('n', '<C-k>', "<Cmd>wincmd k<CR>", {silent = true})
+keymap.set('n', '<C-l>', "<Cmd>wincmd l<CR>", {silent = true})
 
 --------------------------------------------------------------------------------
 --- Plugin Bindings
