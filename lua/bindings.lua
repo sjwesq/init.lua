@@ -60,6 +60,6 @@ if package.loaded["toggleterm"] then
   keymap.set('n', '<leader>th', "<Cmd>ToggleTerm size=30 direction=horizontal<CR>")
   keymap.set('n', '<leader>tf', "<Cmd>ToggleTerm direction=float<CR>")
   keymap.set('n', '<leader>tv', "<Cmd>ToggleTerm size=80 direction=vertical<CR>")
-  keymap.set('n', '<C-BS>', "<Cmd>ToggleTerm<CR>")
-  keymap.set('t', '<C-BS>', "<Cmd>ToggleTerm<CR>")
+  keymap.set('n', '<C-Enter>', "<Cmd>ToggleTerm<CR>")
+  keymap.set('t', '<C-Enter>', "<Cmd>ToggleTerm<CR>")
 end
