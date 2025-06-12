@@ -239,18 +239,21 @@ require("lazy").setup({
       local config_modified_icon = modified_icon
       local config_close_icon = close_icon
       local config_indicator = indicator
+      local config_separator_style = "slant"
       if not enable_nerd_fonts then
         config_buffer_close_icon = "x"
         config_modified_icon = "o"
         config_close_icon = "X"
         config_indicator = { style = "underline" }
+        config_separator_style = separator_style
       end
       require("bufferline").setup({
         options = {
           buffer_close_icon = config_buffer_close_icon,
           modified_icon = config_modified_icon,
           close_icon = config_close_icon,
-          indicator = config_indicator
+          indicator = config_indicator,
+          separator_style = config_separator_style
         }
       })
     end
