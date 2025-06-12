@@ -4,8 +4,6 @@ local opt = vim.opt
 opt.number = true
 vim.cmd [[silent! colorscheme gruvbox]]
 
-opt.termguicolors = true
-
 opt.textwidth = 80
 vim.cmd [[let &colorcolumn=join(range(81,999),",")]]
 
