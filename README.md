@@ -16,11 +16,14 @@ I've confirmed the following:
 - **Neovim version >= 0.11**
 - `git`
 - `gcc` (or `clang`)
-- `curl` or `wget`
 - `pip`
 - `python-pynvim`
 - `tree-sitter` (install through `npm`)
-- A font patched using [Nerd Fonts](https://www.nerdfonts.com)
+- **Optionally:** A font patched using [Nerd Fonts](https://www.nerdfonts.com)
+    - Compatibility without Nerd Fonts can be significantly improved adjusting
+    `enable_nerd_fonts` to `false` in `plugins.lua`
+    - Even still, certain UI elements will be broken without them (removing
+    icons for noice.nvim is just nightmarish)
 
 It should be easy enough to figure out how to get everything working using
 `:checkhealth`, anyway. This is also how you can determine what to disable if
