@@ -24,7 +24,12 @@ require("lazy").setup({
   ------------------------------------------------------------------------------
   "jghauser/mkdir.nvim",
   "jlanzarotta/bufexplorer",
-  {"akinsho/toggleterm.nvim", version = "*", config = true},
+  {
+    "akinsho/toggleterm.nvim", version = "*",
+    config = function()
+      require("toggleterm").setup()
+    end
+  },
   "nvim-telescope/telescope.nvim",
   {
     "echasnovski/mini.nvim",

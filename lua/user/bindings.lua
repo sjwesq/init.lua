@@ -20,11 +20,13 @@ keymap.set('n', '<leader>d', "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
 cmd("imap <c-s> <Esc><Cmd>w<CR>a")
 cmd("nmap <c-s> <Cmd>w<CR>")
 
-
+-- Quick window navigation
 cmd("nmap <silent> <c-k> <Cmd>wincmd k<CR>")
 cmd("nmap <silent> <c-j> <Cmd>wincmd j<CR>")
 cmd("nmap <silent> <c-h> <Cmd>wincmd h<CR>")
 cmd("nmap <silent> <c-l> <Cmd>wincmd l<CR>")
+
+-- Leave terminals easily
 
 --------------------------------------------------------------------------------
 --- Plugin Bindings
@@ -41,6 +43,10 @@ if package.loaded["bufferline"] then
   cmd("nmap <silent> <M-8> <Cmd>BufferLineGoToBuffer 8<CR>")
 end
 
+if package.loaded["mini.files"] then
+  keymap.set('n', '<leader>fm',"<Cmd>lua MiniFiles.open()<CR>")
+end
+
 if package.loaded["Telescope"] then
   local builtin = require('telescope.builtin')
   keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
@@ -49,6 +55,10 @@ if package.loaded["Telescope"] then
   keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 end
 
-if package.loaded["mini.files"] then
-  keymap.set('n', '<leader>fm',"<Cmd>lua MiniFiles.open()<CR>")
+if package.loaded["toggleterm"] then
+  keymap.set('n', '<leader>t', "<Cmd>ToggleTerm size=30 direction=horizontal<CR>")
+  keymap.set('n', '<leader>f', "<Cmd>ToggleTerm direction=float<CR>")
+  keymap.set('n', '<leader>v', "<Cmd>ToggleTerm size=80 direction=vertical<CR>")
+  keymap.set('n', '<C-BS>', "<Cmd>ToggleTerm<CR>")
+  keymap.set('t', '<C-BS>', "<Cmd>ToggleTerm<CR>")
 end
