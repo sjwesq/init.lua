@@ -33,7 +33,7 @@ keymap.set('n', '<C-l>', "<Cmd>wincmd l<CR>", {silent = true})
 --------------------------------------------------------------------------------
 --- Plugin Bindings
 --------------------------------------------------------------------------------
---- Browser-style tab switching
+--- Firefox-style tab switching
 if package.loaded["bufferline"] then
   keymap.set('n', '<M-1>', "<Cmd>BufferLineGoToBuffer 1<CR>", {silent = true})
   keymap.set('n', '<M-2>', "<Cmd>BufferLineGoToBuffer 2<CR>", {silent = true})
@@ -43,6 +43,7 @@ if package.loaded["bufferline"] then
   keymap.set('n', '<M-6>', "<Cmd>BufferLineGoToBuffer 6<CR>", {silent = true})
   keymap.set('n', '<M-7>', "<Cmd>BufferLineGoToBuffer 7<CR>", {silent = true})
   keymap.set('n', '<M-8>', "<Cmd>BufferLineGoToBuffer 8<CR>", {silent = true})
+  keymap.set('n', '<M-9>', "<Cmd>BufferLineGoToBuffer -1<CR>", {silent = true})
 end
 
 if package.loaded["mini.files"] then
