@@ -13,7 +13,10 @@ keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 api.nvim_create_user_command("Vimrc", "edit " .. vim.fn.stdpath("config"), {})
 
+-- Remove search highlight
 keymap.set('n', '<leader>h', "<Cmd>nohl<CR>")
+
+-- Set current directory to file
 keymap.set('n', '<leader>d', "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
 
 -- Ctrl-S to save {
@@ -25,8 +28,6 @@ cmd("nmap <silent> <c-k> <Cmd>wincmd k<CR>")
 cmd("nmap <silent> <c-j> <Cmd>wincmd j<CR>")
 cmd("nmap <silent> <c-h> <Cmd>wincmd h<CR>")
 cmd("nmap <silent> <c-l> <Cmd>wincmd l<CR>")
-
--- Leave terminals easily
 
 --------------------------------------------------------------------------------
 --- Plugin Bindings
