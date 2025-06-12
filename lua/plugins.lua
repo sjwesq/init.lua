@@ -1,5 +1,4 @@
 -- plugins.lua
--- This is the real monster
 
 -- Bootstrap Lazy.nvim if not installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -30,7 +29,12 @@ require("lazy").setup({
       require("toggleterm").setup()
     end
   },
-  "nvim-telescope/telescope.nvim",
+  {
+    "nvim-telescope/telescope.nvim",
+    config = function()
+      require("telescope").setup()
+    end
+  },
   {
     "echasnovski/mini.nvim",
     config = function()
@@ -193,13 +197,11 @@ require("lazy").setup({
   -- Eye Candy
   ------------------------------------------------------------------------------
   "ellisonleao/gruvbox.nvim",
-  'nvim-tree/nvim-web-devicons',
+  "nvim-tree/nvim-web-devicons",
   {
     "nvim-lualine/lualine.nvim",
     config = function()
-      require('lualine').setup {
-        icons_enabled = false
-      }
+      require('lualine').setup()
     end
   },
   {
@@ -212,7 +214,12 @@ require("lazy").setup({
     "folke/noice.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify"
+      {
+        "rcarriga/nvim-notify",
+        opts = {
+          background_colour = "#282828"
+        }
+      }
     },
     config = function()
       require("noice").setup({

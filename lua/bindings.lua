@@ -48,7 +48,7 @@ if package.loaded["mini.files"] then
   keymap.set('n', '<leader>fm',"<Cmd>lua MiniFiles.open()<CR>")
 end
 
-if package.loaded["Telescope"] then
+if package.loaded["telescope"] then
   local builtin = require('telescope.builtin')
   keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
   keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
