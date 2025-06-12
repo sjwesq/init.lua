@@ -1,6 +1,6 @@
 -- Ensure lazy.nvim is installed
 
-require('user.plugins')
-require('user.autocmd')
-require('user.options')
-require('user.bindings')
+require('plugins')
+require('autocmd')
+require('options')
+require('bindings')
