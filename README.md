@@ -1,12 +1,30 @@
 # Sophie's Neovim Init Scripts
 
-Just as it says on the tin -- my personal init scripts for Neovim. Designed to
-be as portable as possible and sanely organized. I'll have to test the
-dependencies in a bit but the main ones that come to mind are `gcc` (for mason)
-and `python3-neovim` (generic dependency.) It should be easy enough to figure
-out how to get everything working using `:checkhealth`, anyway.
+**Neovim 0.11 or higher is HIGHLY recommended, as it is required by some
+plugins.**
 
-It also should be safe to disable any problematic plugins by commenting them out in
-`plugins.lua` -- the scripts are designed and tested so that is safe to do so. If
-a plugin is disabled, any plugin-relevant autocmds or keybindings simply won't
-activate.
+Just as it says on the tin -- my personal init scripts for Neovim. Designed to
+be as portable as possible and sanely organized. It also should be safe to
+disable any problematic plugins by commenting them out in `plugins.lua` -- the
+scripts are designed and tested so that is safe to do so. If a plugin is
+disabled, any plugin-relevant autocmds or keybindings simply won't activate.
+
+## Known Dependencies
+
+I've confirmed the following:
+
+- **Neovim version >= 0.11**
+- `git`
+- `gcc` (or `clang`)
+- `curl` or `wget`
+- `pip`
+- `python-pynvim`
+- `tree-sitter` (install through `npm`)
+- A font patched using [Nerd Fonts](https://www.nerdfonts.com)
+
+It should be easy enough to figure out how to get everything working using
+`:checkhealth`, anyway. This is also how you can determine what to disable if
+you're facing version incompatibilities, as well.
+
+You'll need to manually install any language servers you want to make use of
+using `:Mason` as well, of course.
