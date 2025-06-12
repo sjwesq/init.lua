@@ -56,9 +56,9 @@ if package.loaded["Telescope"] then
 end
 
 if package.loaded["toggleterm"] then
-  keymap.set('n', '<leader>t', "<Cmd>ToggleTerm size=30 direction=horizontal<CR>")
-  keymap.set('n', '<leader>f', "<Cmd>ToggleTerm direction=float<CR>")
-  keymap.set('n', '<leader>v', "<Cmd>ToggleTerm size=80 direction=vertical<CR>")
+  keymap.set('n', '<leader>th', "<Cmd>ToggleTerm size=30 direction=horizontal<CR>")
+  keymap.set('n', '<leader>tf', "<Cmd>ToggleTerm direction=float<CR>")
+  keymap.set('n', '<leader>tv', "<Cmd>ToggleTerm size=80 direction=vertical<CR>")
   keymap.set('n', '<C-BS>', "<Cmd>ToggleTerm<CR>")
   keymap.set('t', '<C-BS>', "<Cmd>ToggleTerm<CR>")
 end
