@@ -2,7 +2,8 @@
 local opt = vim.opt
 
 opt.number = true
-vim.cmd [[colorscheme gruvbox]]
+vim.cmd [[silent! colorscheme gruvbox]]
+
 opt.termguicolors = true
 
 opt.textwidth = 80
