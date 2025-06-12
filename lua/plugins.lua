@@ -1,4 +1,6 @@
 -- plugins.lua
+--
+local enable_nerd_fonts = true
 
 -- Bootstrap Lazy.nvim if not installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -197,11 +199,18 @@ require("lazy").setup({
   -- Eye Candy
   ------------------------------------------------------------------------------
   "ellisonleao/gruvbox.nvim",
-  "nvim-tree/nvim-web-devicons",
+  {
+    "nvim-tree/nvim-web-devicons",
+    cond = enable_nerd_fonts
+  },
   {
     "nvim-lualine/lualine.nvim",
     config = function()
-      require('lualine').setup()
+      require('lualine').setup({
+        options = {
+          icons_enabled = enable_nerd_fonts
+        }
+      })
     end
   },
   {
