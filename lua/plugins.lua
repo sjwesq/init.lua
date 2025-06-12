@@ -1,5 +1,6 @@
 -- plugins.lua
---
+
+-- Plugin settings
 local enable_nerd_fonts = true
 
 -- Bootstrap Lazy.nvim if not installed
@@ -40,6 +41,13 @@ require("lazy").setup({
   {
     "echasnovski/mini.nvim",
     config = function()
+      if enable_nerd_fonts then
+        require("mini.icons").setup()
+      else
+        require("mini.icons").setup({
+          style = "ascii"
+        })
+      end
       require("mini.comment").setup()
       require("mini.files").setup()
     end
@@ -206,9 +214,20 @@ require("lazy").setup({
   {
     "nvim-lualine/lualine.nvim",
     config = function()
+      local config_component_separators
+      local config_section_separators
+      if enable_nerd_fonts then
+        config_component_separators = component_separators
+        config_section_separators = section_separators
+      else
+        config_component_separators = { left = "|", right = "|" }
+        config_section_separators = { left = "", right = "" }
+      end
       require('lualine').setup({
         options = {
-          icons_enabled = enable_nerd_fonts
+          icons_enabled = enable_nerd_fonts,
+          component_separators = config_component_separators,
+          section_separators = config_section_separators
         }
       })
     end
@@ -216,7 +235,24 @@ require("lazy").setup({
   {
     "akinsho/bufferline.nvim",
     config = function()
-      require("bufferline").setup()
+      local config_buffer_close_icon = buffer_close_icon
+      local config_modified_icon = modified_icon
+      local config_close_icon = close_icon
+      local config_indicator = indicator
+      if not enable_nerd_fonts then
+        config_buffer_close_icon = "x"
+        config_modified_icon = "o"
+        config_close_icon = "X"
+        config_indicator = { style = "underline" }
+      end
+      require("bufferline").setup({
+        options = {
+          buffer_close_icon = config_buffer_close_icon,
+          modified_icon = config_modified_icon,
+          close_icon = config_close_icon,
+          indicator = config_indicator
+        }
+      })
     end
   },
   {
