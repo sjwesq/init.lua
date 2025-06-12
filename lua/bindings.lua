@@ -1,9 +1,10 @@
 -- bindings.lua
--- Saving this line for a rainy day:
+-- Saving these lines for a rainy day:
 -- local is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1
+-- local is_mac = vim.fn.has("macunix")
+
 local api = vim.api
 local keymap = vim.keymap
-local cmd = vim.cmd
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -20,28 +21,28 @@ keymap.set('n', '<leader>h', "<Cmd>nohl<CR>")
 keymap.set('n', '<leader>d', "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
 
 -- Ctrl-S to save {
-cmd("imap <c-s> <Esc><Cmd>w<CR>a")
-cmd("nmap <c-s> <Cmd>w<CR>")
+keymap.set('i', '<C-s>', "<Esc><Cmd>w<CR>a")
+keymap.set('n', '<C-s>', "<Cmd>w<CR>")
 
 -- Quick window navigation
-cmd("nmap <silent> <c-k> <Cmd>wincmd k<CR>")
-cmd("nmap <silent> <c-j> <Cmd>wincmd j<CR>")
-cmd("nmap <silent> <c-h> <Cmd>wincmd h<CR>")
-cmd("nmap <silent> <c-l> <Cmd>wincmd l<CR>")
+keymap.set('n', '<C-h>', "<Cmd>wincmd h<CR>")
+keymap.set('n', '<C-j>', "<Cmd>wincmd j<CR>")
+keymap.set('n', '<C-k>', "<Cmd>wincmd k<CR>")
+keymap.set('n', '<C-l>', "<Cmd>wincmd l<CR>")
 
 --------------------------------------------------------------------------------
 --- Plugin Bindings
 --------------------------------------------------------------------------------
 --- Browser-style tab switching
 if package.loaded["bufferline"] then
-  cmd("nmap <silent> <M-1> <Cmd>BufferLineGoToBuffer 1<CR>")
-  cmd("nmap <silent> <M-2> <Cmd>BufferLineGoToBuffer 2<CR>")
-  cmd("nmap <silent> <M-3> <Cmd>BufferLineGoToBuffer 3<CR>")
-  cmd("nmap <silent> <M-4> <Cmd>BufferLineGoToBuffer 4<CR>")
-  cmd("nmap <silent> <M-5> <Cmd>BufferLineGoToBuffer 5<CR>")
-  cmd("nmap <silent> <M-6> <Cmd>BufferLineGoToBuffer 6<CR>")
-  cmd("nmap <silent> <M-7> <Cmd>BufferLineGoToBuffer 7<CR>")
-  cmd("nmap <silent> <M-8> <Cmd>BufferLineGoToBuffer 8<CR>")
+  keymap.set('n', '<M-1>', "<Cmd>BufferLineGoToBuffer 1<CR>", {silent = true})
+  keymap.set('n', '<M-2>', "<Cmd>BufferLineGoToBuffer 2<CR>", {silent = true})
+  keymap.set('n', '<M-3>', "<Cmd>BufferLineGoToBuffer 3<CR>", {silent = true})
+  keymap.set('n', '<M-4>', "<Cmd>BufferLineGoToBuffer 4<CR>", {silent = true})
+  keymap.set('n', '<M-5>', "<Cmd>BufferLineGoToBuffer 5<CR>", {silent = true})
+  keymap.set('n', '<M-6>', "<Cmd>BufferLineGoToBuffer 6<CR>", {silent = true})
+  keymap.set('n', '<M-7>', "<Cmd>BufferLineGoToBuffer 7<CR>", {silent = true})
+  keymap.set('n', '<M-8>', "<Cmd>BufferLineGoToBuffer 8<CR>", {silent = true})
 end
 
 if package.loaded["mini.files"] then
