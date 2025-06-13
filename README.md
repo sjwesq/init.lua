@@ -16,6 +16,7 @@ I've confirmed the following:
 - **Neovim version >= 0.11**
 - `git`
 - `gcc` (or `clang`)
+- `ripgrep`
 - `pip`
 - `python-pynvim`
 - `tree-sitter` (install through `npm`)
