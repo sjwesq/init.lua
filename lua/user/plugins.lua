@@ -210,7 +210,8 @@ require("lazy").setup({
     "ellisonleao/gruvbox.nvim",
     config = function ()
       vim.cmd [[silent! colorscheme gruvbox]]
-    end
+    end,
+    priority = 1000 -- ensure this loads first
   },
   {
     "nvim-tree/nvim-web-devicons",
