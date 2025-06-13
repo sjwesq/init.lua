@@ -206,7 +206,12 @@ require("lazy").setup({
   ------------------------------------------------------------------------------
   -- Eye Candy
   ------------------------------------------------------------------------------
-  "ellisonleao/gruvbox.nvim",
+  {
+    "ellisonleao/gruvbox.nvim",
+    config = function ()
+      vim.cmd [[silent! colorscheme gruvbox]]
+    end
+  },
   {
     "nvim-tree/nvim-web-devicons",
     cond = enable_nerd_fonts
@@ -254,7 +259,7 @@ require("lazy").setup({
           close_icon = config_close_icon,
           indicator = config_indicator,
           separator_style = config_separator_style
-        }
+        },
       })
     end
   },
