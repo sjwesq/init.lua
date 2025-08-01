@@ -65,3 +65,17 @@ if package.loaded["toggleterm"] then
   keymap.set('n', '<C-Enter>', "<Cmd>ToggleTerm<CR>")
   keymap.set('t', '<C-Enter>', "<Cmd>ToggleTerm<CR>")
 end
+
+if package.loaded["luasnip"] then
+  local ls = require("luasnip")
+
+  keymap.set({"i"}, "<C-J>", function() ls.expand() end, {silent = true})
+  keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
+  keymap.set({"i", "s"}, "<C-H>", function() ls.jump(-1) end, {silent = true})
+
+  keymap.set({"i", "s"}, "<C-E>", function()
+    if ls.choice_active() then
+      ls.change_choice(1)
+    end
+  end, {silent = true})
+end

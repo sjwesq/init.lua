@@ -202,7 +202,13 @@ require("lazy").setup({
   },
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-nvim-lsp",
-  "SirVer/ultisnips",
+  "rafamadriz/friendly-snippets",
+  {
+    "L3MON4DE/LuaSnip",
+    config = function ()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end
+  },
   ------------------------------------------------------------------------------
   -- Eye Candy
   ------------------------------------------------------------------------------
