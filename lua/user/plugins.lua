@@ -58,7 +58,16 @@ require("lazy").setup({
   {
     "neovim/nvim-lspconfig",
     config = function()
-      vim.lsp.enable("lua_ls")
+      local lspconfig = require("lspconfig")
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+            }
+          }
+        }
+      })
     end
   },
   {
@@ -71,11 +80,21 @@ require("lazy").setup({
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup {
-        automatic_installation = true
+        automatic_installation = true,
+        automatic_enable = true
       }
     end
   },
-  "dense-analysis/ale",
+  {
+    "mfussenegger/nvim-lint",
+    config = function()
+      local lint = require("lint")
+      lint.linters_by_ft = {
+        python = {'flake8'},
+      }
+    end
+  },
+  "rshkarin/mason-nvim-lint",
   {
     "nvim-treesitter/nvim-treesitter",
     config = function()
@@ -170,6 +189,15 @@ require("lazy").setup({
   -- Auto-Completion
   ------------------------------------------------------------------------------
   {
+    "L3MON4D3/LuaSnip",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      config = function ()
+        require("luasnip.loaders.from_vscode").lazy_load()
+      end
+    }
+  },
+  {
     "hrsh7th/nvim-cmp",
     config = function()
       local cmp = require 'cmp'
@@ -202,13 +230,6 @@ require("lazy").setup({
   },
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-nvim-lsp",
-  "rafamadriz/friendly-snippets",
-  {
-    "L3MON4DE/LuaSnip",
-    config = function ()
-      require("luasnip.loaders.from_vscode").lazy_load()
-    end
-  },
   ------------------------------------------------------------------------------
   -- Eye Candy
   ------------------------------------------------------------------------------
@@ -229,9 +250,11 @@ require("lazy").setup({
       local config_component_separators
       local config_section_separators
       if enable_nerd_fonts then
+        -- Use defaults
         config_component_separators = component_separators
         config_section_separators = section_separators
       else
+        -- Ascii-friendly alternatives
         config_component_separators = { left = "|", right = "|" }
         config_section_separators = { left = "", right = "" }
       end
@@ -277,7 +300,12 @@ require("lazy").setup({
       {
         "rcarriga/nvim-notify",
         opts = {
-          background_colour = "#282828"
+          background_colour = "#282828",
+          max_height = 4,
+          max_width = 66,
+          render = "wrapped-compact",
+          stages = "slide",
+          top_down = false,
         }
       }
     },
