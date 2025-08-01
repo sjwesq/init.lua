@@ -6,12 +6,6 @@
 local api = vim.api
 local keymap = vim.keymap
 
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-keymap.set('n', '<space>e', vim.diagnostic.open_float)
-keymap.set('n', '[d', vim.diagnostic.goto_prev)
-keymap.set('n', ']d', vim.diagnostic.goto_next)
-keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
 api.nvim_create_user_command("Vimrc", "edit " .. vim.fn.stdpath("config"), {})
 
 -- Remove search highlight
