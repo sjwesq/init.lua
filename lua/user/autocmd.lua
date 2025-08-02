@@ -34,3 +34,18 @@ if package.loaded["lint"] then
     end,
   })
 end
+
+if package.loaded["notify"] then
+  vim.api.nvim_create_autocmd("RecordingEnter", {
+    callback = function()
+      local reg = vim.fn.reg_recording()
+      require("notify")("Recording macro @" .. reg, "info", { title = "Macro", timeout = 1000 })
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("RecordingLeave", {
+    callback = function()
+      require("notify")("Stopped recording", "info", { title = "Macro", timeout = 700 })
+    end,
+  })
+end

@@ -94,7 +94,13 @@ require("lazy").setup({
       }
     end
   },
-  "rshkarin/mason-nvim-lint",
+  {
+    "rshkarin/mason-nvim-lint",
+    dependencies = { "mfussenegger/nvim-lint" },
+    config = function()
+      require("mason-nvim-lint").setup()
+    end
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     config = function()
