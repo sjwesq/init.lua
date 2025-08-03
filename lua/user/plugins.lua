@@ -26,17 +26,19 @@ require("lazy").setup({
   ------------------------------------------------------------------------------
   "jghauser/mkdir.nvim",
   "jlanzarotta/bufexplorer",
+  "NStefan002/screenkey.nvim",
   {
-    "akinsho/toggleterm.nvim", version = "*",
+    "akinsho/toggleterm.nvim",
+    version = "*",
     config = function()
       require("toggleterm").setup()
-    end
+    end,
   },
   {
     "nvim-telescope/telescope.nvim",
     config = function()
       require("telescope").setup()
-    end
+    end,
   },
   {
     "echasnovski/mini.nvim",
@@ -45,12 +47,12 @@ require("lazy").setup({
         require("mini.icons").setup()
       else
         require("mini.icons").setup({
-          style = "ascii"
+          style = "ascii",
         })
       end
       require("mini.comment").setup()
       require("mini.files").setup()
-    end
+    end,
   },
   ------------------------------------------------------------------------------
   --- LSP Setup
@@ -64,48 +66,48 @@ require("lazy").setup({
           Lua = {
             workspace = {
               library = vim.api.nvim_get_runtime_file("", true),
-            }
-          }
-        }
+            },
+          },
+        },
       })
-    end
+    end,
   },
   {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup()
-    end
+    end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
     config = function()
-      require("mason-lspconfig").setup {
+      require("mason-lspconfig").setup({
         automatic_installation = true,
-        automatic_enable = true
-      }
-    end
+        automatic_enable = true,
+      })
+    end,
   },
   {
     "mfussenegger/nvim-lint",
     config = function()
       local lint = require("lint")
       lint.linters_by_ft = {
-        python = {'flake8'},
+        python = { "flake8" },
       }
-    end
+    end,
   },
   {
     "rshkarin/mason-nvim-lint",
-    dependencies = { "mfussenegger/nvim-lint" },
+    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-lint" },
     config = function()
       require("mason-nvim-lint").setup()
-    end
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
     config = function()
-      require 'nvim-treesitter.install'.prefer_git = false
-      require 'nvim-treesitter.configs'.setup {
+      require("nvim-treesitter.install").prefer_git = false
+      require("nvim-treesitter.configs").setup({
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
@@ -126,9 +128,9 @@ require("lazy").setup({
         -- Automatically install missing parsers when entering buffer
         -- Recommendation: set to false if you don't have `tree-sitter` CLI
         -- installed locally
-        auto_install = true
-      }
-    end
+        auto_install = true,
+      })
+    end,
   },
   ------------------------------------------------------------------------------
   --- Delimiter Plugins
@@ -137,21 +139,21 @@ require("lazy").setup({
     "kylechui/nvim-surround",
     config = function()
       require("nvim-surround").setup()
-    end
+    end,
   },
   {
     "windwp/nvim-autopairs",
     config = function()
-      require('nvim-autopairs').setup()
+      require("nvim-autopairs").setup()
       -- spaces in autopairs
-      local npairs = require 'nvim-autopairs'
-      local Rule = require 'nvim-autopairs.rule'
-      local cond = require 'nvim-autopairs.conds'
+      local npairs = require("nvim-autopairs")
+      local Rule = require("nvim-autopairs.rule")
+      local cond = require("nvim-autopairs.conds")
 
-      local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
-      npairs.add_rules {
+      local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
+      npairs.add_rules({
         -- Rule for a pair with left-side ' ' and right side ' '
-        Rule(' ', ' ')
+        Rule(" ", " ")
           -- Pair will only occur if the conditional function returns true
           :with_pair(function(opts)
             -- We are checking if we are inserting a space in (), [], or {}
@@ -159,7 +161,7 @@ require("lazy").setup({
             return vim.tbl_contains({
               brackets[1][1] .. brackets[1][2],
               brackets[2][1] .. brackets[2][2],
-              brackets[3][1] .. brackets[3][2]
+              brackets[3][1] .. brackets[3][2],
             }, pair)
           end)
           :with_move(cond.none())
@@ -169,27 +171,31 @@ require("lazy").setup({
             local col = vim.api.nvim_win_get_cursor(0)[2]
             local context = opts.line:sub(col - 1, col + 2)
             return vim.tbl_contains({
-              brackets[1][1] .. '  ' .. brackets[1][2],
-              brackets[2][1] .. '  ' .. brackets[2][2],
-              brackets[3][1] .. '  ' .. brackets[3][2]
+              brackets[1][1] .. "  " .. brackets[1][2],
+              brackets[2][1] .. "  " .. brackets[2][2],
+              brackets[3][1] .. "  " .. brackets[3][2],
             }, context)
-          end)
-      }
+          end),
+      })
       -- For each pair of brackets we will add another rule
       for _, bracket in pairs(brackets) do
-        npairs.add_rules {
+        npairs.add_rules({
           -- Each of these rules is for a pair with left-side '( ' and
           -- right-side ' )' for each bracket type
-          Rule(bracket[1] .. ' ', ' ' .. bracket[2])
+          Rule(bracket[1] .. " ", " " .. bracket[2])
             :with_pair(cond.none())
-            :with_move(function(opts) return opts.char == bracket[2] end)
+            :with_move(function(opts)
+              return opts.char == bracket[2]
+            end)
             :with_del(cond.none())
             :use_key(bracket[2])
             -- Removes the trailing whitespace that can occur without this
-            :replace_map_cr(function(_) return '<C-c>2xi<CR><C-c>O' end)
-        }
+            :replace_map_cr(function(_)
+              return "<C-c>2xi<CR><C-c>O"
+            end),
+        })
       end
-    end
+    end,
   },
   ------------------------------------------------------------------------------
   -- Auto-Completion
@@ -198,41 +204,57 @@ require("lazy").setup({
     "L3MON4D3/LuaSnip",
     dependencies = {
       "rafamadriz/friendly-snippets",
-      config = function ()
+      config = function()
         require("luasnip.loaders.from_vscode").lazy_load()
-      end
-    }
+      end,
+    },
   },
   {
     "hrsh7th/nvim-cmp",
+    dependencies = {
+      "saadparwaiz1/cmp_luasnip",
+    },
     config = function()
-      local cmp = require 'cmp'
-      cmp.setup.cmdline(':', {
+      local cmp = require("cmp")
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+        }),
+        mapping = cmp.mapping.preset.insert({
+          ["<C-l>"] = cmp.mapping.confirm({ select = true }),
+        }),
+      })
+      cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = 'path' }
+          { name = "path" },
         }, {
-            {
-              name = 'cmdline',
-              option = {
-                ignore_cmds = {}
-              }
-            }
-          })
+          {
+            name = "cmdline",
+            option = {
+              ignore_cmds = {},
+            },
+          },
+        }),
       })
-      cmp.setup.cmdline('/', {
+      cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-          { name = 'buffer' }
-        }
+          { name = "buffer" },
+        },
       })
-    end
+    end,
   },
 
   {
     "hrsh7th/cmp-cmdline",
-    config = function()
-    end
+    config = function() end,
   },
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-nvim-lsp",
@@ -241,14 +263,14 @@ require("lazy").setup({
   ------------------------------------------------------------------------------
   {
     "ellisonleao/gruvbox.nvim",
-    config = function ()
-      vim.cmd [[silent! colorscheme gruvbox]]
+    config = function()
+      vim.cmd([[silent! colorscheme gruvbox]])
     end,
-    priority = 1000 -- ensure this loads first
+    priority = 1000, -- ensure this loads first
   },
   {
     "nvim-tree/nvim-web-devicons",
-    cond = enable_nerd_fonts
+    cond = enable_nerd_fonts,
   },
   {
     "nvim-lualine/lualine.nvim",
@@ -264,14 +286,14 @@ require("lazy").setup({
         config_component_separators = { left = "|", right = "|" }
         config_section_separators = { left = "", right = "" }
       end
-      require('lualine').setup({
+      require("lualine").setup({
         options = {
           icons_enabled = enable_nerd_fonts,
           component_separators = config_component_separators,
-          section_separators = config_section_separators
-        }
+          section_separators = config_section_separators,
+        },
       })
-    end
+    end,
   },
   {
     "akinsho/bufferline.nvim",
@@ -294,10 +316,10 @@ require("lazy").setup({
           modified_icon = config_modified_icon,
           close_icon = config_close_icon,
           indicator = config_indicator,
-          separator_style = config_separator_style
+          separator_style = config_separator_style,
         },
       })
-    end
+    end,
   },
   {
     "folke/noice.nvim",
@@ -306,14 +328,13 @@ require("lazy").setup({
       {
         "rcarriga/nvim-notify",
         opts = {
-          background_colour = "#282828",
           max_height = 4,
           max_width = 66,
           render = "wrapped-compact",
           stages = "slide",
-          top_down = false,
-        }
-      }
+          top_down = true,
+        },
+      },
     },
     config = function()
       require("noice").setup({
@@ -327,7 +348,7 @@ require("lazy").setup({
           },
         },
         popupmenu = {
-          backend = "cmp"
+          backend = "cmp",
         },
         -- you can enable a preset for easier configuration
         presets = {
@@ -338,8 +359,6 @@ require("lazy").setup({
           lsp_doc_border = false, -- add a border to hover docs + signature help
         },
       })
-
-    end
-  }
+    end,
+  },
 })
-

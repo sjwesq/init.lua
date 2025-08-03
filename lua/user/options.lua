@@ -4,7 +4,7 @@ local opt = vim.opt
 opt.number = true
 
 opt.textwidth = 80
-vim.cmd [[let &colorcolumn=join(range(81,999),",")]]
+vim.cmd([[let &colorcolumn=join(range(81,999),",")]])
 
 opt.list = true
 opt.listchars = "tab:▸ ,eol:¬,nbsp:␣,extends:›,precedes:‹"
@@ -32,5 +32,5 @@ vim.diagnostic.config({
   virtual_text = {
     prefix = "●",
     spacing = 2,
-  }
+  },
 })
