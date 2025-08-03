@@ -4,12 +4,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   callback = function()
     local save_cursor = vim.fn.getpos(".")
-    pcall(function() vim.cmd [[%s/\s\+$//e]] end)
+    pcall(function()
+      vim.cmd([[%s/\s\+$//e]])
+    end)
     vim.fn.setpos(".", save_cursor)
   end,
 })
 
-vim.o.updatetime = 300  -- delay before showing hover
+vim.o.updatetime = 300 -- delay before showing hover
 
 vim.api.nvim_create_autocmd("CursorHold", {
   callback = function()
