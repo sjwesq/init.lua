@@ -32,9 +32,12 @@ require("lazy").setup({
     end,
   },
   {
-    "nvim-telescope/telescope.nvim",
-    config = function()
-      require("telescope").setup()
+    "chrisgrieser/nvim-origami",
+    event = "VeryLazy",
+    opts = {},
+    init = function()
+      vim.opt.foldlevel = 99
+      vim.opt.foldlevelstart = 99
     end,
   },
   {
@@ -53,6 +56,7 @@ require("lazy").setup({
         respect_selection_type = true,
       })
       require("mini.animate").setup()
+      require("mini.pick").setup()
     end,
   },
   ------------------------------------------------------------------------------
@@ -71,7 +75,6 @@ require("lazy").setup({
           },
         },
       })
-
     end,
   },
   {
@@ -196,7 +199,6 @@ require("lazy").setup({
   ------------------------------------------------------------------------------
   {
     "saghen/blink.cmp",
-
     dependencies = {
       "rafamadriz/friendly-snippets",
       "neovim/nvim-lspconfig",
@@ -205,18 +207,17 @@ require("lazy").setup({
           textDocument = {
             foldingRange = {
               dynamicRegistration = false,
-              lineFoldingOnly = true
-            }
-          }
+              lineFoldingOnly = true,
+            },
+          },
         }
-        capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+        capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
       end,
     },
-
     version = "1.*",
     opts = {
       keymap = { preset = "default" },
-      fuzzy = { implementation = "prefer_rust_with_warning" }
+      fuzzy = { implementation = "prefer_rust" },
     },
   },
   ------------------------------------------------------------------------------
@@ -312,8 +313,8 @@ require("lazy").setup({
         },
         redo = {
           enabled = true,
-        }
-      }
+        },
+      },
     },
   },
   -- Only for recordings:
