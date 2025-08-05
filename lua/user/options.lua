@@ -13,8 +13,6 @@ opt.ignorecase = true
 opt.smartcase = true
 
 vim.cmd("filetype plugin indent on")
-vim.wo.foldmethod = "syntax"
-vim.cmd("autocmd BufReadPost,FileReadPost * normal zR")
 opt.expandtab = true
 opt.tabstop = 2
 opt.shiftwidth = 2
@@ -33,8 +31,3 @@ vim.diagnostic.config({
     spacing = 2,
   },
 })
-
-if package.loaded["nvim-treesitter"] then
-  vim.wo.foldmethod = "expr"
-  opt.foldexpr="nvim_treesitter#foldexpr()"
-end

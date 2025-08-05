@@ -45,15 +45,11 @@ if package.loaded["bufferline"] then
 end
 
 if package.loaded["mini.files"] then
-  keymap.set("n", "<leader>fm", "<Cmd>lua MiniFiles.open()<CR>")
+  keymap.set("n", "<leader>e", "<Cmd>lua MiniFiles.open()<CR>")
 end
 
-if package.loaded["telescope"] then
-  local builtin = require("telescope.builtin")
-  keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
-  keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
-  keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
-  keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
+if package.loaded["mini.pick"] then
+  keymap.set("n", "<leader>f", "<Cmd>Pick files<CR>")
 end
 
 if package.loaded["toggleterm"] then
