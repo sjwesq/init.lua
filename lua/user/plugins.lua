@@ -56,6 +56,7 @@ require("lazy").setup({
         respect_selection_type = true,
       })
       require("mini.animate").setup()
+      require("mini.indentscope").setup()
       require("mini.pick").setup()
     end,
   },
@@ -218,6 +219,12 @@ require("lazy").setup({
     opts = {
       keymap = { preset = "default" },
       fuzzy = { implementation = "prefer_rust" },
+      completion = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 300,
+        },
+      },
     },
   },
   ------------------------------------------------------------------------------
