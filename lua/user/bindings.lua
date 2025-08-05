@@ -7,7 +7,6 @@ local api = vim.api
 local keymap = vim.keymap
 
 api.nvim_create_user_command("Vimrc", "edit " .. vim.fn.stdpath("config"), {})
-api.nvim_create_user_command("Wbd", "w|bd", {})
 
 -- Remove search highlight
 keymap.set("n", "<leader>h", "<Cmd>nohl<CR>")
@@ -15,9 +14,13 @@ keymap.set("n", "<leader>h", "<Cmd>nohl<CR>")
 -- Set current directory to file
 keymap.set("n", "<leader>d", "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
 
--- Ctrl-S to save {
-keymap.set("i", "<C-s>", "<Esc><Cmd>w<CR>a")
+-- Ctrl-S to save
+keymap.set("i", "<C-s>", "<Cmd>w<CR>")
 keymap.set("n", "<C-s>", "<Cmd>w<CR>")
+
+-- Buffer closing
+keymap.set("n", "<M-w>", "<Cmd>bd<CR>")
+keymap.set("n", "<M-S-w>", "<Cmd>w|bd<CR>")
 
 -- Quick window navigation
 keymap.set("n", "<C-h>", "<Cmd>wincmd h<CR>", { silent = true })
@@ -59,24 +62,4 @@ if package.loaded["toggleterm"] then
   keymap.set("n", "<leader>tv", "<Cmd>ToggleTerm size=80 direction=vertical<CR>")
   keymap.set("n", "<C-Enter>", "<Cmd>ToggleTerm<CR>")
   keymap.set("t", "<C-Enter>", "<Cmd>ToggleTerm<CR>")
-end
-
-if package.loaded["luasnip"] then
-  local ls = require("luasnip")
-
-  keymap.set({ "i" }, "<C-J>", function()
-    ls.expand()
-  end, { silent = true })
-  keymap.set({ "i", "s" }, "<C-L>", function()
-    ls.jump(1)
-  end, { silent = true })
-  keymap.set({ "i", "s" }, "<C-H>", function()
-    ls.jump(-1)
-  end, { silent = true })
-
-  keymap.set({ "i", "s" }, "<C-E>", function()
-    if ls.choice_active() then
-      ls.change_choice(1)
-    end
-  end, { silent = true })
 end

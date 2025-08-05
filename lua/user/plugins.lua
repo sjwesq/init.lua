@@ -24,9 +24,6 @@ require("lazy").setup({
   ------------------------------------------------------------------------------
   --- Navigation/Misc
   ------------------------------------------------------------------------------
-  "jghauser/mkdir.nvim",
-  "jlanzarotta/bufexplorer",
-  "NStefan002/screenkey.nvim",
   {
     "akinsho/toggleterm.nvim",
     version = "*",
@@ -52,6 +49,10 @@ require("lazy").setup({
       end
       require("mini.comment").setup()
       require("mini.files").setup()
+      require("mini.surround").setup({
+        respect_selection_type = true,
+      })
+      require("mini.animate").setup()
     end,
   },
   ------------------------------------------------------------------------------
@@ -70,16 +71,21 @@ require("lazy").setup({
           },
         },
       })
+
     end,
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     config = function()
       require("mason").setup()
     end,
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "mason-org/mason.nvim",
+    },
     config = function()
       require("mason-lspconfig").setup({
         automatic_installation = true,
@@ -117,12 +123,6 @@ require("lazy").setup({
         },
         incremental_selection = {
           enable = true,
-          keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
-          },
         },
 
         -- Automatically install missing parsers when entering buffer
@@ -135,12 +135,6 @@ require("lazy").setup({
   ------------------------------------------------------------------------------
   --- Delimiter Plugins
   ------------------------------------------------------------------------------
-  {
-    "kylechui/nvim-surround",
-    config = function()
-      require("nvim-surround").setup()
-    end,
-  },
   {
     "windwp/nvim-autopairs",
     config = function()
@@ -201,63 +195,30 @@ require("lazy").setup({
   -- Auto-Completion
   ------------------------------------------------------------------------------
   {
-    "L3MON4D3/LuaSnip",
+    "saghen/blink.cmp",
+
     dependencies = {
       "rafamadriz/friendly-snippets",
+      "neovim/nvim-lspconfig",
       config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
+        local capabilities = {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = false,
+              lineFoldingOnly = true
+            }
+          }
+        }
+        capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
       end,
     },
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "saadparwaiz1/cmp_luasnip",
-    },
-    config = function()
-      local cmp = require("cmp")
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-        }),
-        mapping = cmp.mapping.preset.insert({
-          ["<C-l>"] = cmp.mapping.confirm({ select = true }),
-        }),
-      })
-      cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-        }, {
-          {
-            name = "cmdline",
-            option = {
-              ignore_cmds = {},
-            },
-          },
-        }),
-      })
-      cmp.setup.cmdline("/", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = "buffer" },
-        },
-      })
-    end,
-  },
 
-  {
-    "hrsh7th/cmp-cmdline",
-    config = function() end,
+    version = "1.*",
+    opts = {
+      keymap = { preset = "default" },
+      fuzzy = { implementation = "prefer_rust_with_warning" }
+    },
   },
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-nvim-lsp",
   ------------------------------------------------------------------------------
   -- Eye Candy
   ------------------------------------------------------------------------------
@@ -332,33 +293,45 @@ require("lazy").setup({
           max_width = 66,
           render = "wrapped-compact",
           stages = "slide",
-          top_down = true,
+          top_down = false,
         },
       },
     },
     config = function()
-      require("noice").setup({
-        lsp = {
-          -- override markdown rendering so that **cmp** and other plugins use
-          -- **Treesitter**
-          override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-          },
-        },
-        popupmenu = {
-          backend = "cmp",
-        },
-        -- you can enable a preset for easier configuration
-        presets = {
-          bottom_search = false, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
-          long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false, -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = false, -- add a border to hover docs + signature help
-        },
-      })
+      require("noice").setup()
     end,
   },
+  {
+    "rachartier/tiny-glimmer.nvim",
+    event = "VeryLazy",
+    priority = 10,
+    opts = {
+      overwrite = {
+        undo = {
+          enabled = true,
+        },
+        redo = {
+          enabled = true,
+        }
+      }
+    },
+  },
+  -- Only for recordings:
+  -- {
+  --   "NStefan002/screenkey.nvim",
+  --   dependencies = {
+  --     "rcarriga/nvim-notify",
+  --     opts = {
+  --       top_down = true
+  --     }
+  --   },
+  --   config = function()
+  --     require("screenkey").setup({
+  --       disable = {
+  --         buftypes = { "terminal" },
+  --       }
+  --     })
+  --     vim.cmd("Screenkey")
+  --   end
+  -- },
 })

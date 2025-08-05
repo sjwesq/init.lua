@@ -37,6 +37,7 @@ if package.loaded["lint"] then
   })
 end
 
+-- Restore macro notifications
 if package.loaded["notify"] then
   vim.api.nvim_create_autocmd("RecordingEnter", {
     callback = function()
