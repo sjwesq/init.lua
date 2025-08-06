@@ -26,6 +26,12 @@ vim.api.nvim_create_autocmd("CursorHold", {
   end,
 })
 
+vim.api.nvim_create_autocmd("TermOpen", {
+    callback = function()
+      vim.opt_local.spell = false
+    end,
+})
+
 if package.loaded["lint"] then
   vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
     callback = function()

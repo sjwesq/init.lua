@@ -21,23 +21,14 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugin list
 require("lazy").setup({
-  ------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   --- Navigation/Misc
-  ------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = function()
       require("toggleterm").setup()
-    end,
-  },
-  {
-    "chrisgrieser/nvim-origami",
-    event = "VeryLazy",
-    opts = {},
-    init = function()
-      vim.opt.foldlevel = 99
-      vim.opt.foldlevelstart = 99
     end,
   },
   {
@@ -55,14 +46,15 @@ require("lazy").setup({
       require("mini.surround").setup({
         respect_selection_type = true,
       })
-      require("mini.animate").setup()
-      require("mini.indentscope").setup()
+      if (not vim.g.neovide) then
+        require("mini.animate").setup()
+      end
       require("mini.pick").setup()
     end,
   },
-  ------------------------------------------------------------------------------
-  --- LSP Setup
-  ------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
+  --- LSP/Linter Setup
+  -----------------------------------------------------------------------------
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -129,16 +121,13 @@ require("lazy").setup({
           enable = true,
         },
 
-        -- Automatically install missing parsers when entering buffer
-        -- Recommendation: set to false if you don't have `tree-sitter` CLI
-        -- installed locally
         auto_install = true,
       })
     end,
   },
-  ------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   --- Delimiter Plugins
-  ------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   {
     "windwp/nvim-autopairs",
     config = function()
@@ -164,7 +153,7 @@ require("lazy").setup({
           end)
           :with_move(cond.none())
           :with_cr(cond.none())
-          -- We only delete the pair of spaces when the cursor is as such: ( | )
+          -- We only delete the pair of spaces when the cursor is as such: ( |
           :with_del(function(opts)
             local col = vim.api.nvim_win_get_cursor(0)[2]
             local context = opts.line:sub(col - 1, col + 2)
@@ -195,9 +184,9 @@ require("lazy").setup({
       end
     end,
   },
-  ------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   -- Auto-Completion
-  ------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   {
     "saghen/blink.cmp",
     dependencies = {
@@ -227,9 +216,9 @@ require("lazy").setup({
       },
     },
   },
-  ------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   -- Eye Candy
-  ------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------
   {
     "ellisonleao/gruvbox.nvim",
     config = function()
@@ -323,6 +312,19 @@ require("lazy").setup({
         },
       },
     },
+  },
+  {
+    "xiyaowong/virtcolumn.nvim",
+    init = function()
+      vim.opt.cc = "80"
+    end
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
   },
   -- Only for recordings:
   -- {

@@ -8,6 +8,14 @@ local keymap = vim.keymap
 
 api.nvim_create_user_command("Vimrc", "edit " .. vim.fn.stdpath("config"), {})
 
+-- For recording
+if vim.g.neovide then
+  api.nvim_create_user_command("Trans", function()
+    vim.g.neovide_opacity = 0.8
+    vim.o.guifont = "Iosevka:h29"
+  end, {})
+end
+
 -- Remove search highlight
 keymap.set("n", "<leader>h", "<Cmd>nohl<CR>")
 
@@ -53,7 +61,7 @@ if package.loaded["mini.pick"] then
 end
 
 if package.loaded["toggleterm"] then
-  keymap.set("n", "<leader>th", "<Cmd>ToggleTerm size=30 direction=horizontal<CR>")
+  keymap.set("n", "<leader>th", "<Cmd>ToggleTerm size=25 direction=horizontal<CR>")
   keymap.set("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>")
   keymap.set("n", "<leader>tv", "<Cmd>ToggleTerm size=80 direction=vertical<CR>")
   keymap.set("n", "<C-Enter>", "<Cmd>ToggleTerm<CR>")
