@@ -4,7 +4,6 @@ local opt = vim.opt
 opt.number = true
 
 opt.textwidth = 80
-vim.cmd([[let &colorcolumn=join(range(81,999),",")]])
 
 opt.list = true
 opt.listchars = "tab:▸ ,eol:¬,nbsp:␣,extends:›,precedes:‹"
@@ -22,6 +21,7 @@ opt.spell = true
 opt.spelllang = "en_us"
 opt.wildmenu = true
 opt.hidden = true
+opt.virtualedit = "block"
 opt.wildignore = "*.exe,*.dll,*.pdb,*.so"
 opt.completeopt = "menu,menuone,preview,noselect,noinsert"
 
@@ -31,3 +31,8 @@ vim.diagnostic.config({
     spacing = 2,
   },
 })
+
+if vim.g.neovide then
+  vim.o.guifont = "Iosevka:h12"
+  vim.g.neovide_opacity = 0.95
+end
