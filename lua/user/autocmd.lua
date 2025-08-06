@@ -27,9 +27,9 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 
 vim.api.nvim_create_autocmd("TermOpen", {
-    callback = function()
-      vim.opt_local.spell = false
-    end,
+  callback = function()
+    vim.opt_local.spell = false
+  end,
 })
 
 if package.loaded["lint"] then
