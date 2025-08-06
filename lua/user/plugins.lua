@@ -46,7 +46,7 @@ require("lazy").setup({
       require("mini.surround").setup({
         respect_selection_type = true,
       })
-      if (not vim.g.neovide) then
+      if not vim.g.neovide then
         require("mini.animate").setup()
       end
       require("mini.pick").setup()
@@ -317,7 +317,7 @@ require("lazy").setup({
     "xiyaowong/virtcolumn.nvim",
     init = function()
       vim.opt.cc = "80"
-    end
+    end,
   },
   {
     "lukas-reineke/indent-blankline.nvim",
