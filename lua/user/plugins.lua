@@ -50,7 +50,24 @@ require("lazy").setup({
         require("mini.animate").setup()
       end
       require("mini.pick").setup()
+      require("mini.pairs").setup()
     end,
+  },
+  {
+    "Bekaboo/dropbar.nvim",
+    dependencies = {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make'
+    },
+    config = function()
+      local dropbar_api = require('dropbar.api')
+      vim.keymap.set('n', '<Leader>;', dropbar_api.pick,
+        { desc = 'Pick symbols in winbar' })
+      vim.keymap.set('n', '[;', dropbar_api.goto_context_start,
+        { desc = 'Go to start of current context' })
+      vim.keymap.set('n', '];', dropbar_api.select_next_context,
+        { desc = 'Select next context' })
+    end
   },
   -----------------------------------------------------------------------------
   --- LSP/Linter Setup
@@ -125,64 +142,8 @@ require("lazy").setup({
       })
     end,
   },
-  -----------------------------------------------------------------------------
-  --- Delimiter Plugins
-  -----------------------------------------------------------------------------
   {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup()
-      -- spaces in autopairs
-      local npairs = require("nvim-autopairs")
-      local Rule = require("nvim-autopairs.rule")
-      local cond = require("nvim-autopairs.conds")
-
-      local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
-      npairs.add_rules({
-        -- Rule for a pair with left-side ' ' and right side ' '
-        Rule(" ", " ")
-          -- Pair will only occur if the conditional function returns true
-          :with_pair(function(opts)
-            -- We are checking if we are inserting a space in (), [], or {}
-            local pair = opts.line:sub(opts.col - 1, opts.col)
-            return vim.tbl_contains({
-              brackets[1][1] .. brackets[1][2],
-              brackets[2][1] .. brackets[2][2],
-              brackets[3][1] .. brackets[3][2],
-            }, pair)
-          end)
-          :with_move(cond.none())
-          :with_cr(cond.none())
-          -- We only delete the pair of spaces when the cursor is as such: ( |
-          :with_del(function(opts)
-            local col = vim.api.nvim_win_get_cursor(0)[2]
-            local context = opts.line:sub(col - 1, col + 2)
-            return vim.tbl_contains({
-              brackets[1][1] .. "  " .. brackets[1][2],
-              brackets[2][1] .. "  " .. brackets[2][2],
-              brackets[3][1] .. "  " .. brackets[3][2],
-            }, context)
-          end),
-      })
-      -- For each pair of brackets we will add another rule
-      for _, bracket in pairs(brackets) do
-        npairs.add_rules({
-          -- Each of these rules is for a pair with left-side '( ' and
-          -- right-side ' )' for each bracket type
-          Rule(bracket[1] .. " ", " " .. bracket[2])
-            :with_pair(cond.none())
-            :with_move(function(opts)
-              return opts.char == bracket[2]
-            end)
-            :with_del(cond.none())
-            :use_key(bracket[2])
-            -- Removes the trailing whitespace that can occur without this
-            :replace_map_cr(function(_)
-              return "<C-c>2xi<CR><C-c>O"
-            end),
-        })
-      end
-    end,
+    "bakpakin/janet.vim",
   },
   -----------------------------------------------------------------------------
   -- Auto-Completion
@@ -325,6 +286,9 @@ require("lazy").setup({
     ---@module "ibl"
     ---@type ibl.config
     opts = {},
+  },
+  {
+    "hiphish/rainbow-delimiters.nvim",
   },
   -- Only for recordings:
   -- {
