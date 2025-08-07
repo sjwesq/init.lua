@@ -42,7 +42,12 @@ require("lazy").setup({
         })
       end
       require("mini.comment").setup()
-      require("mini.files").setup()
+      require("mini.files").setup({
+        windows = {
+          preview = true,
+          width_preview = 80,
+        },
+      })
       require("mini.surround").setup({
         respect_selection_type = true,
       })
