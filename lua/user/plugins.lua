@@ -45,7 +45,7 @@ require("lazy").setup({
       require("mini.files").setup({
         windows = {
           preview = true,
-          width_preview = 80,
+          width_preview = 60,
         },
       })
       require("mini.surround").setup({
@@ -155,23 +155,34 @@ require("lazy").setup({
   -----------------------------------------------------------------------------
   {
     "saghen/blink.cmp",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      "neovim/nvim-lspconfig",
-      config = function()
-        local capabilities = {
-          textDocument = {
-            foldingRange = {
-              dynamicRegistration = false,
-              lineFoldingOnly = true,
-            },
-          },
-        }
-        capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-      end,
-    },
     version = "1.*",
+    dependencies = {
+      {
+        "L3MON4D3/LuaSnip",
+        version = "2.*",
+        run = "make install_jsregexp",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+        end
+      },
+      {
+        "neovim/nvim-lspconfig",
+        config  = function()
+          local capabilities = {
+            textDocument = {
+              foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+              },
+            },
+          }
+          capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+        end,
+      },
+    },
     opts = {
+      snippets = { preset = "luasnip" },
       keymap = { preset = "default" },
       fuzzy = { implementation = "prefer_rust" },
       completion = {
@@ -261,7 +272,17 @@ require("lazy").setup({
       },
     },
     config = function()
-      require("noice").setup()
+      require("noice").setup({
+        routes = {
+          {
+            view = "popup",
+            filter = { event = "msg_show", min_height = 5 },
+          },
+        },
+        presets = {
+          bottom_search = true,
+        },
+      })
     end,
   },
   {

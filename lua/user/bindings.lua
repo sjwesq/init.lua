@@ -36,6 +36,9 @@ keymap.set("n", "<C-j>", "<Cmd>wincmd j<CR>", { silent = true })
 keymap.set("n", "<C-k>", "<Cmd>wincmd k<CR>", { silent = true })
 keymap.set("n", "<C-l>", "<Cmd>wincmd l<CR>", { silent = true })
 
+keymap.set("c", "<C-E>", "<End>") -- I think blink breaks this?
+
+
 --------------------------------------------------------------------------------
 --- Plugin Bindings
 --------------------------------------------------------------------------------
