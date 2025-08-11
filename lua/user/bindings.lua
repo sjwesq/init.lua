@@ -1,10 +1,12 @@
--- bindings.lua
+-- lua/user/bindings.lua
 -- Saving these lines for a rainy day:
 -- local is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1
 -- local is_mac = vim.fn.has("macunix")
 
 local api = vim.api
 local keymap = vim.keymap
+
+-- Commands -------------------------------------------------------------------
 
 api.nvim_create_user_command("Vimrc", "edit " .. vim.fn.stdpath("config"), {})
 
@@ -15,6 +17,8 @@ if vim.g.neovide then
     vim.o.guifont = "Iosevka:h29"
   end, {})
 end
+
+-- Keymaps --------------------------------------------------------------------
 
 -- Remove search highlight
 keymap.set("n", "<leader>h", "<Cmd>nohl<CR>")
@@ -38,11 +42,8 @@ keymap.set("n", "<C-l>", "<Cmd>wincmd l<CR>", { silent = true })
 
 keymap.set("c", "<C-E>", "<End>") -- I think blink breaks this?
 
-
---------------------------------------------------------------------------------
---- Plugin Bindings
---------------------------------------------------------------------------------
---- Firefox-style tab switching
+-- Plugin Bindings ------------------------------------------------------------
+-- Firefox-style tab switching
 if package.loaded["bufferline"] then
   keymap.set("n", "<M-1>", "<Cmd>BufferLineGoToBuffer 1<CR>", { silent = true })
   keymap.set("n", "<M-2>", "<Cmd>BufferLineGoToBuffer 2<CR>", { silent = true })

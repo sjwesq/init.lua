@@ -1,11 +1,11 @@
--- options.lua
+-- lua/user/options.lua
 local opt = vim.opt
 
 opt.number = true
 
 opt.textwidth = 80
 
-opt.list = true
+opt.list = false
 opt.listchars = "tab:▸ ,eol:¬,nbsp:␣,extends:›,precedes:‹"
 
 opt.ignorecase = true
@@ -33,7 +33,7 @@ vim.diagnostic.config({
 })
 
 if vim.g.neovide then
-  vim.o.guifont = "Inconsolata Nerd Font:h12"
+  vim.o.guifont = "Inconsolata Nerd Font:h12:#e-subpixelantialias"
   vim.g.neovide_opacity = 0.95
   vim.g.neovide_input_macos_option_key_is_meta = "both"
 end

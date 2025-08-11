@@ -1,4 +1,4 @@
--- plugins.lua
+-- lua/user/plugins.lua
 
 -- Plugin settings
 local enable_nerd_fonts = true
@@ -19,11 +19,9 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
--- plugin list
+-- Plugin list starts here ----------------------------------------------------
 require("lazy").setup({
-  -----------------------------------------------------------------------------
-  --- Navigation/Misc
-  -----------------------------------------------------------------------------
+  -- Navigation/Misc ----------------------------------------------------------
   {
     "akinsho/toggleterm.nvim",
     version = "*",
@@ -31,6 +29,20 @@ require("lazy").setup({
       require("toggleterm").setup()
     end,
   },
+  {
+    "Bekaboo/dropbar.nvim",
+    dependencies = {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+    },
+    config = function()
+      local dropbar_api = require("dropbar.api")
+      vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+      vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+      vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
+    end,
+  },
+  -- mini.nvim ----------------------------------------------------------------
   {
     "echasnovski/mini.nvim",
     config = function()
@@ -58,25 +70,7 @@ require("lazy").setup({
       require("mini.pairs").setup()
     end,
   },
-  {
-    "Bekaboo/dropbar.nvim",
-    dependencies = {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'make'
-    },
-    config = function()
-      local dropbar_api = require('dropbar.api')
-      vim.keymap.set('n', '<Leader>;', dropbar_api.pick,
-        { desc = 'Pick symbols in winbar' })
-      vim.keymap.set('n', '[;', dropbar_api.goto_context_start,
-        { desc = 'Go to start of current context' })
-      vim.keymap.set('n', '];', dropbar_api.select_next_context,
-        { desc = 'Select next context' })
-    end
-  },
-  -----------------------------------------------------------------------------
-  --- LSP/Linter Setup
-  -----------------------------------------------------------------------------
+  --- LSP/Linter Setup -------------------------------------------------------
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -150,9 +144,7 @@ require("lazy").setup({
   {
     "bakpakin/janet.vim",
   },
-  -----------------------------------------------------------------------------
-  -- Auto-Completion
-  -----------------------------------------------------------------------------
+  -- Auto-Completion/Snippets -------------------------------------------------
   {
     "saghen/blink.cmp",
     version = "1.*",
@@ -164,11 +156,11 @@ require("lazy").setup({
         dependencies = { "rafamadriz/friendly-snippets" },
         config = function()
           require("luasnip.loaders.from_vscode").lazy_load()
-        end
+        end,
       },
       {
         "neovim/nvim-lspconfig",
-        config  = function()
+        config = function()
           local capabilities = {
             textDocument = {
               foldingRange = {
@@ -193,9 +185,7 @@ require("lazy").setup({
       },
     },
   },
-  -----------------------------------------------------------------------------
-  -- Eye Candy
-  -----------------------------------------------------------------------------
+  -- Visual changes -----------------------------------------------------------
   {
     "ellisonleao/gruvbox.nvim",
     config = function()
@@ -233,12 +223,14 @@ require("lazy").setup({
   {
     "akinsho/bufferline.nvim",
     config = function()
+      -- Use defaults
       local config_buffer_close_icon = buffer_close_icon
       local config_modified_icon = modified_icon
       local config_close_icon = close_icon
       local config_indicator = indicator
       local config_separator_style = "slant"
       if not enable_nerd_fonts then
+        -- Ascii-friendly alternatives
         config_buffer_close_icon = "x"
         config_modified_icon = "o"
         config_close_icon = "X"
@@ -275,8 +267,9 @@ require("lazy").setup({
       require("noice").setup({
         routes = {
           {
-            view = "popup",
-            filter = { event = "msg_show", min_height = 4 },
+            -- Closer to vanilla behavior
+            view = "messages",
+            filter = { event = "msg_show", min_height = 2 },
           },
         },
         presets = {
