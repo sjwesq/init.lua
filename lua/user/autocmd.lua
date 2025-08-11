@@ -1,5 +1,6 @@
--- autocmd.lua
--- Remove all trailing whitespace on save:
+-- lua/user/autocmd.lua
+
+-- Remove all trailing whitespace on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   callback = function()
@@ -12,7 +13,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 vim.o.updatetime = 300 -- delay before showing hover
-
 vim.api.nvim_create_autocmd("CursorHold", {
   callback = function()
     vim.diagnostic.open_float(nil, {
@@ -32,6 +32,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+-- Plugin autocmds ------------------------------------------------------------
 if package.loaded["lint"] then
   vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
     callback = function()
