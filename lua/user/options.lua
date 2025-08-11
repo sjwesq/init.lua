@@ -33,7 +33,6 @@ vim.diagnostic.config({
 })
 
 if vim.g.neovide then
-  vim.o.guifont = "Inconsolata Nerd Font:h12:#e-subpixelantialias"
-  vim.g.neovide_opacity = 0.95
+  vim.o.guifont = "Ligconsolata Nerd Font:h12:#e-subpixelantialias"
   vim.g.neovide_input_macos_option_key_is_meta = "both"
 end
