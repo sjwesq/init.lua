@@ -276,7 +276,7 @@ require("lazy").setup({
         routes = {
           {
             view = "popup",
-            filter = { event = "msg_show", min_height = 5 },
+            filter = { event = "msg_show", min_height = 4 },
           },
         },
         presets = {
