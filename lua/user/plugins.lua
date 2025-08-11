@@ -187,9 +187,9 @@ require("lazy").setup({
   },
   -- Visual changes -----------------------------------------------------------
   {
-    "ellisonleao/gruvbox.nvim",
-    config = function()
-      vim.cmd([[silent! colorscheme gruvbox]])
+    "neanias/everforest-nvim",
+    init = function()
+      vim.cmd.colorscheme("everforest")
     end,
     priority = 1000, -- ensure this loads first
   },

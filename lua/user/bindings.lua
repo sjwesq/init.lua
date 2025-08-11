@@ -14,7 +14,7 @@ api.nvim_create_user_command("Vimrc", "edit " .. vim.fn.stdpath("config"), {})
 if vim.g.neovide then
   api.nvim_create_user_command("Trans", function()
     vim.g.neovide_opacity = 0.8
-    vim.o.guifont = "Iosevka:h29"
+    vim.g.neovide_scale_factor = 2.5
   end, {})
 end
 
