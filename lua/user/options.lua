@@ -21,6 +21,7 @@ opt.spell = true
 opt.spelllang = "en_us"
 opt.wildmenu = true
 opt.hidden = true
+opt.confirm = true
 opt.virtualedit = "block"
 opt.wildignore = "*.exe,*.dll,*.pdb,*.so"
 opt.completeopt = "menu,menuone,preview,noselect,noinsert"
