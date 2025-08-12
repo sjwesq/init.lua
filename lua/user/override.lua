@@ -1,0 +1,3 @@
+-- This file is meant for system-specific overrides. Some settings (like
+-- font size, or whether something like 'mini.animate' should be enabled) aren't
+-- suitable for every platform, but I got tired of manually managing them.
