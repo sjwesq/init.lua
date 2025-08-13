@@ -54,6 +54,16 @@ if package.loaded["bufferline"] then
   keymap.set("n", "<M-7>", "<Cmd>BufferLineGoToBuffer 7<CR>", { silent = true })
   keymap.set("n", "<M-8>", "<Cmd>BufferLineGoToBuffer 8<CR>", { silent = true })
   keymap.set("n", "<M-9>", "<Cmd>BufferLineGoToBuffer -1<CR>", { silent = true })
+else
+  keymap.set("n", "<M-1>", "<Cmd>tabnext 1<CR>", { silent = true })
+  keymap.set("n", "<M-2>", "<Cmd>tabnext 2<CR>", { silent = true })
+  keymap.set("n", "<M-3>", "<Cmd>tabnext 3<CR>", { silent = true })
+  keymap.set("n", "<M-4>", "<Cmd>tabnext 4<CR>", { silent = true })
+  keymap.set("n", "<M-5>", "<Cmd>tabnext 5<CR>", { silent = true })
+  keymap.set("n", "<M-6>", "<Cmd>tabnext 6<CR>", { silent = true })
+  keymap.set("n", "<M-7>", "<Cmd>tabnext 7<CR>", { silent = true })
+  keymap.set("n", "<M-8>", "<Cmd>tabnext 8<CR>", { silent = true })
+  keymap.set("n", "<M-9>", "<Cmd>tabfirst<CR>", { silent = true })
 end
 
 if package.loaded["mini.files"] then
