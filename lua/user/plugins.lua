@@ -23,13 +23,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   -- Navigation/Misc ----------------------------------------------------------
   {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    config = function()
-      require("toggleterm").setup()
-    end,
-  },
-  {
     "Bekaboo/dropbar.nvim",
     dependencies = {
       "nvim-telescope/telescope-fzf-native.nvim",
@@ -268,19 +261,6 @@ require("lazy").setup({
         },
       },
     },
-  },
-  {
-    "xiyaowong/virtcolumn.nvim",
-    init = function()
-      vim.opt.cc = "80"
-    end,
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    ---@module "ibl"
-    ---@type ibl.config
-    opts = {},
   },
   {
     "hiphish/rainbow-delimiters.nvim",

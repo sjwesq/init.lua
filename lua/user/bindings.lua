@@ -45,25 +45,17 @@ keymap.set("c", "<C-E>", "<End>") -- I think blink breaks this?
 -- Plugin Bindings ------------------------------------------------------------
 -- Firefox-style tab switching
 if package.loaded["bufferline"] then
-  keymap.set("n", "<M-1>", "<Cmd>BufferLineGoToBuffer 1<CR>", { silent = true })
-  keymap.set("n", "<M-2>", "<Cmd>BufferLineGoToBuffer 2<CR>", { silent = true })
-  keymap.set("n", "<M-3>", "<Cmd>BufferLineGoToBuffer 3<CR>", { silent = true })
-  keymap.set("n", "<M-4>", "<Cmd>BufferLineGoToBuffer 4<CR>", { silent = true })
-  keymap.set("n", "<M-5>", "<Cmd>BufferLineGoToBuffer 5<CR>", { silent = true })
-  keymap.set("n", "<M-6>", "<Cmd>BufferLineGoToBuffer 6<CR>", { silent = true })
-  keymap.set("n", "<M-7>", "<Cmd>BufferLineGoToBuffer 7<CR>", { silent = true })
-  keymap.set("n", "<M-8>", "<Cmd>BufferLineGoToBuffer 8<CR>", { silent = true })
+  for i = 1, 8 do
+    keymap.set("n", "<M-" .. i .. ">", "<Cmd>BufferLineGoToBuffer " .. i .. "<CR>", { silent = true })
+  end
   keymap.set("n", "<M-9>", "<Cmd>BufferLineGoToBuffer -1<CR>", { silent = true })
 else
-  keymap.set("n", "<M-1>", "<Cmd>tabnext 1<CR>", { silent = true })
-  keymap.set("n", "<M-2>", "<Cmd>tabnext 2<CR>", { silent = true })
-  keymap.set("n", "<M-3>", "<Cmd>tabnext 3<CR>", { silent = true })
-  keymap.set("n", "<M-4>", "<Cmd>tabnext 4<CR>", { silent = true })
-  keymap.set("n", "<M-5>", "<Cmd>tabnext 5<CR>", { silent = true })
-  keymap.set("n", "<M-6>", "<Cmd>tabnext 6<CR>", { silent = true })
-  keymap.set("n", "<M-7>", "<Cmd>tabnext 7<CR>", { silent = true })
-  keymap.set("n", "<M-8>", "<Cmd>tabnext 8<CR>", { silent = true })
-  keymap.set("n", "<M-9>", "<Cmd>tabfirst<CR>", { silent = true })
+  for i = 1, 8 do
+    keymap.set("n", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
+    keymap.set("t", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
+  end
+  keymap.set("n", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
+  keymap.set("t", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
 end
 
 if package.loaded["mini.files"] then
