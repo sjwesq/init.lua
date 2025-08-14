@@ -36,11 +36,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.api.nvim_create_autocmd({ "TabEnter" }, {
   pattern = "term://*",
   callback = function()
-    local num_windows = 1
-    if package.loaded["noice"] then
-      num_windows = 3
-    end
-    if #vim.api.nvim_tabpage_list_wins(0) == num_windows then
+    if #vim.api.nvim_tabpage_list_wins(0) == 1 then
       vim.cmd("startinsert")
     else
       vim.cmd("stopinsert")
