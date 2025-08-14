@@ -36,18 +36,14 @@ require("lazy").setup({
     event = "VeryLazy",
     cond = not vim.g.neovide,
     config = {
-      function()
-        require("mini.animate").setup()
-      end,
+      function() require("mini.animate").setup() end,
     },
   },
   {
     "echasnovski/mini.comment",
     event = "VeryLazy",
     config = {
-      function()
-        require("mini.comment").setup()
-      end,
+      function() require("mini.comment").setup() end,
     },
   },
   {
@@ -65,19 +61,25 @@ require("lazy").setup({
   {
     "echasnovski/mini.pairs",
     event = "VeryLazy",
-    config = function()
-      require("mini.pairs").setup({})
-    end,
+    config = function() require("mini.pairs").setup({}) end,
   },
   {
     "echasnovski/mini.pick",
     event = "VeryLazy",
-    config = function()
-      require("mini.pick").setup({})
-    end,
+    config = function() require("mini.pick").setup({}) end,
   },
   {
     "echasnovski/mini.statusline",
+    dependencies = {
+      {
+        "echasnovski/mini-git",
+        config = function() require("mini.git").setup({}) end,
+      },
+      {
+        "echasnovski/mini.diff",
+        config = function() require("mini.diff").setup({}) end,
+      },
+    },
     config = function()
       require("mini.statusline").setup({ use_icons = enable_nerd_fonts })
     end,
@@ -113,9 +115,7 @@ require("lazy").setup({
   {
     "mason-org/mason.nvim",
     event = "VeryLazy",
-    config = function()
-      require("mason").setup()
-    end,
+    config = function() require("mason").setup() end,
   },
   {
     "mason-org/mason-lspconfig.nvim",
@@ -145,9 +145,7 @@ require("lazy").setup({
     "rshkarin/mason-nvim-lint",
     event = "VeryLazy",
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-lint" },
-    config = function()
-      require("mason-nvim-lint").setup()
-    end,
+    config = function() require("mason-nvim-lint").setup() end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -181,9 +179,7 @@ require("lazy").setup({
         version = "2.*",
         run = "make install_jsregexp",
         dependencies = { "rafamadriz/friendly-snippets" },
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
+        config = function() require("luasnip.loaders.from_vscode").lazy_load() end,
       },
       {
         "neovim/nvim-lspconfig",
@@ -215,9 +211,7 @@ require("lazy").setup({
   -- Visual changes -----------------------------------------------------------
   {
     "neanias/everforest-nvim",
-    init = function()
-      vim.cmd.colorscheme("everforest")
-    end,
+    init = function() vim.cmd.colorscheme("everforest") end,
     priority = 1000, -- ensure this loads first
   },
   {
