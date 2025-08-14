@@ -1,4 +1,5 @@
 -- lua/user/autocmd.lua
+local utils = require("user.utils")
 
 -- Remove all trailing whitespace on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -45,29 +46,31 @@ vim.api.nvim_create_autocmd({ "TabEnter" }, {
 })
 
 -- Plugin autocmds ------------------------------------------------------------
-if package.loaded["lint"] then
-  vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
-    callback = function()
-      local lint_status, lint = pcall(require, "lint")
-      if lint_status then
-        lint.try_lint()
-      end
-    end,
-  })
-end
+if package.loaded["lazy"] then
+  if utils.is_plugin_registered("nvim-lint") then
+    vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
+      callback = function()
+        local lint_status, lint = pcall(require, "lint")
+        if lint_status then
+          lint.try_lint()
+        end
+      end,
+    })
+  end
 
--- Restore macro notifications
-if package.loaded["notify"] then
-  vim.api.nvim_create_autocmd("RecordingEnter", {
-    callback = function()
-      local reg = vim.fn.reg_recording()
-      require("notify")("Recording macro @" .. reg, "info", { title = "Macro", timeout = 1000 })
-    end,
-  })
+  -- Restore macro notifications
+  if utils.is_plugin_registered("nvim-notify") then
+    vim.api.nvim_create_autocmd("RecordingEnter", {
+      callback = function()
+        local reg = vim.fn.reg_recording()
+        require("notify")("Recording macro @" .. reg, "info", { title = "Macro", timeout = 1000 })
+      end,
+    })
 
-  vim.api.nvim_create_autocmd("RecordingLeave", {
-    callback = function()
-      require("notify")("Stopped recording", "info", { title = "Macro", timeout = 700 })
-    end,
-  })
+    vim.api.nvim_create_autocmd("RecordingLeave", {
+      callback = function()
+        require("notify")("Stopped recording", "info", { title = "Macro", timeout = 700 })
+      end,
+    })
+  end
 end

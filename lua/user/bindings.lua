@@ -2,6 +2,7 @@
 -- Saving these lines for a rainy day:
 -- local is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1
 -- local is_mac = vim.fn.has("macunix")
+local utils = require("user.utils")
 
 local api = vim.api
 local keymap = vim.keymap
@@ -44,34 +45,41 @@ keymap.set("c", "<C-e>", "<End>") -- I think blink breaks this?
 
 -- Plugin Bindings ------------------------------------------------------------
 -- Firefox-style tab switching
-if package.loaded["bufferline"] then
-  for i = 1, 8 do
-    keymap.set("n", "<M-" .. i .. ">", "<Cmd>BufferLineGoToBuffer " .. i .. "<CR>", { silent = true })
+if package.loaded["lazy"] then
+  if utils.is_plugin_registered("bufferline.nvim") then
+    for i = 1, 8 do
+      keymap.set("n", "<M-" .. i .. ">", "<Cmd>BufferLineGoToBuffer " .. i .. "<CR>", { silent = true })
+    end
+    keymap.set("n", "<M-9>", "<Cmd>BufferLineGoToBuffer -1<CR>", { silent = true })
+  else
+    for i = 1, 8 do
+      keymap.set("n", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
+      keymap.set("t", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
+      keymap.set("i", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
+    end
+    keymap.set("n", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
+    keymap.set("t", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
+    keymap.set("i", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
   end
-  keymap.set("n", "<M-9>", "<Cmd>BufferLineGoToBuffer -1<CR>", { silent = true })
-else
-  for i = 1, 8 do
-    keymap.set("n", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
-    keymap.set("t", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
-    keymap.set("i", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
+
+  if utils.is_plugin_registered("mini.files") then
+    keymap.set("n", "<leader>e", "<Cmd>lua MiniFiles.open()<CR>")
   end
-  keymap.set("n", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
-  keymap.set("t", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
-  keymap.set("i", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
-end
+  if utils.is_plugin_registered("mini.pick") then
+    keymap.set("n", "<leader>f", "<Cmd>Pick files<CR>")
+  end
+  if utils.is_plugin_registered("toggleterm.nvim") then
+    keymap.set("n", "<leader>th", "<Cmd>ToggleTerm size=25 direction=horizontal<CR>")
+    keymap.set("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>")
+    keymap.set("n", "<leader>tv", "<Cmd>ToggleTerm size=80 direction=vertical<CR>")
+    keymap.set("n", "<C-Enter>", "<Cmd>ToggleTerm<CR>")
+    keymap.set("t", "<C-Enter>", "<Cmd>ToggleTerm<CR>")
+  end
 
-if package.loaded["mini.files"] then
-  keymap.set("n", "<leader>e", "<Cmd>lua MiniFiles.open()<CR>")
-end
-
-if package.loaded["mini.pick"] then
-  keymap.set("n", "<leader>f", "<Cmd>Pick files<CR>")
-end
-
-if package.loaded["toggleterm"] then
-  keymap.set("n", "<leader>th", "<Cmd>ToggleTerm size=25 direction=horizontal<CR>")
-  keymap.set("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>")
-  keymap.set("n", "<leader>tv", "<Cmd>ToggleTerm size=80 direction=vertical<CR>")
-  keymap.set("n", "<C-Enter>", "<Cmd>ToggleTerm<CR>")
-  keymap.set("t", "<C-Enter>", "<Cmd>ToggleTerm<CR>")
+  if utils.is_plugin_registered("dropbar.nvim") then
+    local dropbar_api = require("dropbar.api")
+    keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+    keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+    keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
+  end
 end
