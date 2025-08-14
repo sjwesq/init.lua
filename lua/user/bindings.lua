@@ -40,7 +40,7 @@ keymap.set("n", "<C-j>", "<Cmd>wincmd j<CR>", { silent = true })
 keymap.set("n", "<C-k>", "<Cmd>wincmd k<CR>", { silent = true })
 keymap.set("n", "<C-l>", "<Cmd>wincmd l<CR>", { silent = true })
 
-keymap.set("c", "<C-E>", "<End>") -- I think blink breaks this?
+keymap.set("c", "<C-e>", "<End>") -- I think blink breaks this?
 
 -- Plugin Bindings ------------------------------------------------------------
 -- Firefox-style tab switching
@@ -53,9 +53,11 @@ else
   for i = 1, 8 do
     keymap.set("n", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
     keymap.set("t", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
+    keymap.set("i", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
   end
   keymap.set("n", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
   keymap.set("t", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
+  keymap.set("i", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
 end
 
 if package.loaded["mini.files"] then

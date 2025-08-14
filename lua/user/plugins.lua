@@ -236,9 +236,9 @@ require("lazy").setup({
             view = "messages",
             filter = {
               event = "msg_show",
-              min_height = 2 ,
+              min_height = 2,
               ["not"] = { kind = "confirm" },
-            }
+            },
           },
         },
         presets = {
