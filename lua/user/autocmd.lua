@@ -32,13 +32,20 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
-vim.api.nvim_create_autocmd({"TermOpen", "BufWinEnter", "WinEnter"}, {
+-- Enter insert mode when switching to terminal tab
+vim.api.nvim_create_autocmd({ "TabEnter" }, {
+  pattern = "term://*",
   callback = function()
-    local name = vim.api.nvim_buf_get_name(0)
-    if name:match("lazygit") then
-      vim.cmd("startinsert")
+    local num_windows = 1
+    if package.loaded["noice"] then
+      num_windows = 3
     end
-  end
+    if #vim.api.nvim_tabpage_list_wins(0) == num_windows then
+      vim.cmd("startinsert")
+    else
+      vim.cmd("stopinsert")
+    end
+  end,
 })
 
 -- Plugin autocmds ------------------------------------------------------------
