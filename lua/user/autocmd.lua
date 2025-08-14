@@ -32,6 +32,15 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+vim.api.nvim_create_autocmd({"TermOpen", "BufWinEnter", "WinEnter"}, {
+  callback = function()
+    local name = vim.api.nvim_buf_get_name(0)
+    if name:match("lazygit") then
+      vim.cmd("startinsert")
+    end
+  end
+})
+
 -- Plugin autocmds ------------------------------------------------------------
 if package.loaded["lint"] then
   vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {

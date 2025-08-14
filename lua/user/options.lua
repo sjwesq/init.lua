@@ -27,6 +27,8 @@ opt.virtualedit = "block"
 opt.wildignore = "*.exe,*.dll,*.pdb,*.so"
 opt.completeopt = "menu,menuone,preview,noselect,noinsert"
 
+opt.undofile = true
+
 vim.diagnostic.config({
   virtual_text = {
     prefix = "●",
