@@ -24,48 +24,79 @@ require("lazy").setup({
   -- Navigation/Misc ----------------------------------------------------------
   {
     "Bekaboo/dropbar.nvim",
+    event = "VeryLazy",
     dependencies = {
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
     },
-    config = function()
-      local dropbar_api = require("dropbar.api")
-      vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
-      vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
-      vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
-    end,
   },
   -- mini.nvim ----------------------------------------------------------------
   {
-    "echasnovski/mini.nvim",
+    "echasnovski/mini.animate",
+    event = "VeryLazy",
+    cond = not vim.g.neovide,
+    config = {
+      function()
+        require("mini.animate").setup()
+      end,
+    },
+  },
+  {
+    "echasnovski/mini.comment",
+    event = "VeryLazy",
+    config = {
+      function()
+        require("mini.comment").setup()
+      end,
+    },
+  },
+  {
+    "echasnovski/mini.files",
+    event = "VeryLazy",
     config = function()
-      if enable_nerd_fonts then
-        require("mini.icons").setup()
-      else
-        require("mini.icons").setup({
-          style = "ascii",
-        })
-      end
-      require("mini.comment").setup()
       require("mini.files").setup({
         windows = {
           preview = true,
           width_preview = 60,
         },
       })
-      require("mini.surround").setup({
-        respect_selection_type = true,
-      })
-      if not vim.g.neovide then
-        require("mini.animate").setup()
-      end
-      require("mini.pick").setup()
-      require("mini.pairs").setup()
     end,
+  },
+  {
+    "echasnovski/mini.pairs",
+    event = "VeryLazy",
+    config = function()
+      require("mini.pairs").setup({})
+    end,
+  },
+  {
+    "echasnovski/mini.pick",
+    event = "VeryLazy",
+    config = function()
+      require("mini.pick").setup({})
+    end,
+  },
+  {
+    "echasnovski/mini.statusline",
+    config = function()
+      require("mini.statusline").setup({ use_icons = enable_nerd_fonts })
+    end,
+  },
+  {
+    "echasnovski/mini.surround",
+    event = "VeryLazy",
+    config = function()
+      require("mini.surround").setup({ respect_selection_type = true })
+    end,
+  },
+  {
+    "echasnovski/mini.icons",
+    config = { style = enable_nerd_fonts and "default" or "ascii" },
   },
   --- LSP/Linter Setup -------------------------------------------------------
   {
     "neovim/nvim-lspconfig",
+    event = "VeryLazy",
     config = function()
       local lspconfig = require("lspconfig")
       lspconfig.lua_ls.setup({
@@ -81,12 +112,14 @@ require("lazy").setup({
   },
   {
     "mason-org/mason.nvim",
+    event = "VeryLazy",
     config = function()
       require("mason").setup()
     end,
   },
   {
     "mason-org/mason-lspconfig.nvim",
+    event = "VeryLazy",
     dependencies = {
       "neovim/nvim-lspconfig",
       "mason-org/mason.nvim",
@@ -100,6 +133,7 @@ require("lazy").setup({
   },
   {
     "mfussenegger/nvim-lint",
+    event = "VeryLazy",
     config = function()
       local lint = require("lint")
       lint.linters_by_ft = {
@@ -109,6 +143,7 @@ require("lazy").setup({
   },
   {
     "rshkarin/mason-nvim-lint",
+    event = "VeryLazy",
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-lint" },
     config = function()
       require("mason-nvim-lint").setup()
@@ -116,6 +151,7 @@ require("lazy").setup({
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    event = "VeryLazy",
     config = function()
       require("nvim-treesitter.install").prefer_git = false
       require("nvim-treesitter.configs").setup({
@@ -134,12 +170,10 @@ require("lazy").setup({
       })
     end,
   },
-  {
-    "bakpakin/janet.vim",
-  },
   -- Auto-Completion/Snippets -------------------------------------------------
   {
     "saghen/blink.cmp",
+    event = "VeryLazy",
     version = "1.*",
     dependencies = {
       {
@@ -191,29 +225,6 @@ require("lazy").setup({
     cond = enable_nerd_fonts,
   },
   {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      local config_component_separators
-      local config_section_separators
-      if enable_nerd_fonts then
-        -- Use defaults
-        config_component_separators = component_separators
-        config_section_separators = section_separators
-      else
-        -- Ascii-friendly alternatives
-        config_component_separators = { left = "|", right = "|" }
-        config_section_separators = { left = "", right = "" }
-      end
-      require("lualine").setup({
-        options = {
-          icons_enabled = enable_nerd_fonts,
-          component_separators = config_component_separators,
-          section_separators = config_section_separators,
-        },
-      })
-    end,
-  },
-  {
     "folke/noice.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -247,24 +258,7 @@ require("lazy").setup({
       })
     end,
   },
-  {
-    "rachartier/tiny-glimmer.nvim",
-    event = "VeryLazy",
-    priority = 10,
-    opts = {
-      overwrite = {
-        undo = {
-          enabled = true,
-        },
-        redo = {
-          enabled = true,
-        },
-      },
-    },
-  },
-  {
-    "hiphish/rainbow-delimiters.nvim",
-  },
+  { "hiphish/rainbow-delimiters.nvim" },
   -- Only for recordings:
   -- {
   --   "NStefan002/screenkey.nvim",
