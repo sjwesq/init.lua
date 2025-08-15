@@ -1,5 +1,5 @@
 -- lua/user/autocmd.lua
-local utils = require("user.utils")
+local utils = require("config.utils")
 
 -- Remove all trailing whitespace on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
