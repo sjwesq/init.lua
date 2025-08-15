@@ -1,6 +1,15 @@
--- init.lua
-require("user.plugins") -- All plugins and plugin configuration
-require("user.autocmd") -- All autocmds
-require("user.options") -- All options (vim.opt, etc)
-require("user.bindings") -- All keybinds and commands, incl. for plugins
-require("user.override") -- System-specific overrides
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.options")
+require("config.lazy")
+require("config.override")
+
+-- Lazy load the rest
+if package.loaded["lazy"] then
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "VeryLazy",
+    callback = function()
+      require("config.keymaps")
+      require("config.autocmds")
+    end,
+  })
+end
