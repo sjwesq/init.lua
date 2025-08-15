@@ -12,4 +12,7 @@ if package.loaded["lazy"] then
       require("config.autocmds")
     end,
   })
+else
+  require("config.keymaps")
+  require("config.autocmds")
 end
