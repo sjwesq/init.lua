@@ -26,6 +26,7 @@ opt.confirm = true
 opt.virtualedit = "block"
 opt.wildignore = "*.exe,*.dll,*.pdb,*.so"
 opt.completeopt = "menu,menuone,preview,noselect,noinsert"
+opt.splitbelow = true
 
 opt.undofile = true
 
