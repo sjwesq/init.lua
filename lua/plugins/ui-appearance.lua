@@ -8,6 +8,7 @@ return {
   },
   {
     "echasnovski/mini.icons",
+    event = "VeryLazy",
     config = { style = enable_nerd_fonts and "default" or "ascii" },
   },
   {
@@ -28,10 +29,12 @@ return {
   },
   {
     "nvim-tree/nvim-web-devicons",
+    event = "VeryLazy",
     cond = enable_nerd_fonts,
   },
   {
     "folke/noice.nvim",
+    event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
       {
@@ -64,10 +67,14 @@ return {
       })
     end,
   },
-  { "hiphish/rainbow-delimiters.nvim" },
+  {
+    "hiphish/rainbow-delimiters.nvim",
+    event = "VeryLazy"
+  },
   -- Only for recordings:
   {
     "NStefan002/screenkey.nvim",
+    event = "VeryLazy",
     enabled = false,
     dependencies = {
       "rcarriga/nvim-notify",
