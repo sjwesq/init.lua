@@ -1,4 +1,3 @@
--- lua/user/autocmd.lua
 local utils = require("config.utils")
 
 -- Remove all trailing whitespace on save
