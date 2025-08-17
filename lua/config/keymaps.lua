@@ -1,4 +1,3 @@
--- lua/user/bindings.lua
 -- Saving these lines for a rainy day:
 -- local is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1
 -- local is_mac = vim.fn.has("macunix")
