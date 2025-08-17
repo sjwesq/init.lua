@@ -143,7 +143,6 @@ local plugin_list = {
   -- UI Behavior {{{-----------------------------------------------------------
   {
     "folke/noice.nvim",
-    event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
       {
