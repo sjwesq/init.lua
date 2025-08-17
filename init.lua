@@ -1,6 +1,7 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
+ENABLE_NERD_FONTS = false
+
 require("config.options")
-require("config.lazy")
+require("config.plugins")
 require("config.override")
 
 -- Lazy load the rest
