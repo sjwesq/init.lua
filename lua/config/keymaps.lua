@@ -10,6 +10,7 @@ local keymap = vim.keymap
 -- Commands -------------------------------------------------------------------
 
 api.nvim_create_user_command("Vimrc", "edit " .. vim.fn.stdpath("config"), {})
+api.nvim_create_user_command("Wordify", "g/./,/^$/join", {})
 
 -- For recording
 if vim.g.neovide then
