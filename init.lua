@@ -1,4 +1,4 @@
-ENABLE_NERD_FONTS = false
+ENABLE_NERD_FONTS = true
 
 require("config.options")
 require("config.plugins")
