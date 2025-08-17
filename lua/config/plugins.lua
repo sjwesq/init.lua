@@ -300,8 +300,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = { plugin_list },
   checker = {
-    enabled = true,
-    notify = true,
+    enabled = false,
+    notify = false,
   },
   performance = {
     rtp = {
