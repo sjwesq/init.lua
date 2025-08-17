@@ -2,8 +2,15 @@ local enable_nerd_fonts = true
 
 return {
   {
-    "neanias/everforest-nvim",
-    init = function() vim.cmd.colorscheme("everforest") end,
+    "sainnhe/everforest",
+    init = function()
+      vim.cmd.colorscheme("everforest")
+      vim.api.nvim_set_hl(0, "VirtualTextError", { link="DiagnosticError" })
+      vim.api.nvim_set_hl(0, "VirtualTextWarning", { link="DiagnosticWarn" })
+      vim.api.nvim_set_hl(0, "VirtualTextInfo", { link="DiagnosticInfo" })
+      vim.api.nvim_set_hl(0, "VirtualTextHint", { link="DiagnosticHint" })
+      vim.api.nvim_set_hl(0, "VirtualTextOk", { link="DiagnosticOk" })
+    end,
     priority = 1000, -- ensure this loads first
   },
   {
