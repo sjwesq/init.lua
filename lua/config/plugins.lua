@@ -121,6 +121,13 @@ local plugin_list = {
   -- }}}
   -- Text Editing {{{----------------------------------------------------------
   {
+    "echasnovski/mini.align",
+    event = "VeryLazy",
+    config = {
+      function() require("mini.align").setup() end,
+    },
+  },
+  {
     "echasnovski/mini.comment",
     event = "VeryLazy",
     config = {
@@ -184,14 +191,6 @@ local plugin_list = {
     },
   },
   {
-    "Bekaboo/dropbar.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-    },
-  },
-  {
     "echasnovski/mini.files",
     event = "VeryLazy",
     config = function()
@@ -235,11 +234,6 @@ local plugin_list = {
     config = function()
       require("mini.statusline").setup({ use_icons = ENABLE_NERD_FONTS })
     end,
-  },
-  {
-    "nvim-tree/nvim-web-devicons",
-    event = "VeryLazy",
-    cond = ENABLE_NERD_FONTS,
   },
   {
     "hiphish/rainbow-delimiters.nvim",
