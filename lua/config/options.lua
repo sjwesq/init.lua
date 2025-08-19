@@ -4,6 +4,7 @@ opt.number = true
 
 opt.textwidth = 80
 opt.colorcolumn = "80"
+opt.termguicolors = true
 
 opt.list = false
 opt.listchars = "tab:▸ ,eol:¬,nbsp:␣,extends:›,precedes:‹"
