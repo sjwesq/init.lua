@@ -37,7 +37,7 @@ local plugin_list = {
       keymap = {
         preset = "default",
         ["<C-space"] = false,
-        ["<C-'>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-j>"] = { "show", "show_documentation", "hide_documentation" },
       },
       fuzzy = { implementation = "prefer_rust" },
       completion = {
