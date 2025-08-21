@@ -34,13 +34,18 @@ local plugin_list = {
     },
     opts = {
       snippets = { preset = "luasnip" },
-      keymap = { preset = "default" },
+      keymap = {
+        preset = "default",
+        ["<C-space"] = false,
+        ["<C-'>"] = { "show", "show_documentation", "hide_documentation" },
+      },
       fuzzy = { implementation = "prefer_rust" },
       completion = {
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 300,
         },
+        menu = { auto_show = false },
       },
     },
   },
