@@ -41,6 +41,7 @@ vim.api.nvim_create_autocmd({ "TabEnter" }, {
 })
 
 -- Plugin autocmds ------------------------------------------------------------
+
 if package.loaded["lazy"] then
   if utils.is_plugin_registered("nvim-lint") then
     vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
@@ -48,6 +49,13 @@ if package.loaded["lazy"] then
         local lint_status, lint = pcall(require, "lint")
         if lint_status then lint.try_lint() end
       end,
+    })
+  end
+
+  if utils.is_plugin_registered("nvim-treesitter") then
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = { '<filetype>' },
+      callback = function() vim.treesitter.start() end,
     })
   end
 

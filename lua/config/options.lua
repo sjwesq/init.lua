@@ -14,9 +14,7 @@ opt.smartcase = true
 
 vim.cmd("filetype plugin indent on")
 opt.expandtab = true
-opt.tabstop = 2
 opt.shiftwidth = 2
-opt.softtabstop = 2
 opt.backspace = "indent,eol,start"
 opt.spell = true
 opt.spelllang = "en_us"

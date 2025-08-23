@@ -104,7 +104,7 @@ local plugin_list = {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    event = "VeryLazy",
+    lazy = false,
     config = function()
       require("nvim-treesitter.install").prefer_git = false
       require("nvim-treesitter.configs").setup({
