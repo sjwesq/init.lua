@@ -133,13 +133,6 @@ local plugin_list = {
     },
   },
   {
-    "echasnovski/mini.comment",
-    event = "VeryLazy",
-    config = {
-      function() require("mini.comment").setup() end,
-    },
-  },
-  {
     "echasnovski/mini.pairs",
     event = "VeryLazy",
     config = function() require("mini.pairs").setup({}) end,
@@ -153,40 +146,6 @@ local plugin_list = {
   },
   --}}}
   -- UI Behavior {{{-----------------------------------------------------------
-  {
-    "folke/noice.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      {
-        "rcarriga/nvim-notify",
-        opts = {
-          max_height = 4,
-          max_width = 66,
-          render = "wrapped-compact",
-          stages = "slide",
-          top_down = false,
-        },
-      },
-    },
-    config = function()
-      require("noice").setup({
-        routes = {
-          {
-            -- Closer to vanilla behavior
-            view = "messages",
-            filter = {
-              event = "msg_show",
-              min_height = 2,
-              ["not"] = { kind = "confirm" },
-            },
-          },
-        },
-        presets = {
-          bottom_search = true,
-        },
-      })
-    end,
-  },
   {
     "echasnovski/mini.animate",
     event = "VeryLazy",
