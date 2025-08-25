@@ -17,6 +17,10 @@ api.nvim_create_user_command("Journal", function()
   local quarter = "Q" .. math.floor((month - 1) / 3 + 1)
   local dayfile = os.date("%m-%d") .. ".md"
 
+  local dir = string.format("%s/%s/%s", DIR_JOURNAL, year, quarter)
+  dir = vim.fn.expand(dir)
+  vim.fn.mkdir(dir, "p")
+
   local path = string.format("%s/%s/%s/%s", DIR_JOURNAL, year, quarter, dayfile)
   path = vim.fn.expand(path)
   if vim.fn.filereadable(path) == 0 then
