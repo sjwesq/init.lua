@@ -1,4 +1,5 @@
 ENABLE_NERD_FONTS = true
+DIR_JOURNAL = "~/Sync/notes/journal"
 
 require("config.options")
 require("config.plugins")

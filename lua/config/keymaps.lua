@@ -11,6 +11,17 @@ local keymap = vim.keymap
 api.nvim_create_user_command("Vimrc", "edit " .. vim.fn.stdpath("config"), {})
 api.nvim_create_user_command("Wordify", "g/./,/^$/join", {})
 
+api.nvim_create_user_command("Journal", function()
+  local year = os.date("%Y")
+  local month = tonumber(os.date("%m"))
+  local quarter = "Q" .. math.floor((month - 1) / 3 + 1)
+  local dayfile = os.date("%m-%d") .. ".md"
+
+  local path = string.format("%s/%s/%s/%s", DIR_JOURNAL, year, quarter, dayfile)
+  vim.cmd("edit " .. path)
+end, {})
+
+
 -- For recording
 if vim.g.neovide then
   api.nvim_create_user_command("Trans", function()
