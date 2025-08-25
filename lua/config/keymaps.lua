@@ -18,6 +18,11 @@ api.nvim_create_user_command("Journal", function()
   local dayfile = os.date("%m-%d") .. ".md"
 
   local path = string.format("%s/%s/%s/%s", DIR_JOURNAL, year, quarter, dayfile)
+  path = vim.fn.expand(path)
+  if vim.fn.filereadable(path) == 0 then
+    local header = string.format("# %s (%s)", os.date("%Y-%m-%d"), os.date("%A"))
+    vim.fn.writefile({ header }, path)
+  end
   vim.cmd("edit " .. path)
 end, {})
 

@@ -3,7 +3,6 @@ DIR_JOURNAL = "~/Sync/notes/journal"
 
 require("config.options")
 require("config.plugins")
-require("config.override")
 
 -- Lazy load the rest
 if package.loaded["lazy"] then
@@ -12,9 +11,11 @@ if package.loaded["lazy"] then
     callback = function()
       require("config.keymaps")
       require("config.autocmds")
+      require("config.override")
     end,
   })
 else
   require("config.keymaps")
   require("config.autocmds")
+  require("config.override")
 end
