@@ -147,12 +147,6 @@ local plugin_list = {
     event = "VeryLazy",
     config = function() require("mini.surround").setup({ respect_selection_type = true }) end,
   },
-  {
-    "brianhuster/live-preview.nvim",
-    event = "VeryLazy",
-    dependencies = { "echasnovski/mini.pick" },
-    opts = { port = 5501 }, -- There was a conflict, not sure with what...
-  },
   --}}}
   -- UI Behavior {{{-----------------------------------------------------------
   {
@@ -206,6 +200,12 @@ local plugin_list = {
   {
     "hiphish/rainbow-delimiters.nvim",
     event = "VeryLazy",
+  },
+  {
+    "brenoprata10/nvim-highlight-colors",
+    config = function()
+      require("nvim-highlight-colors").setup({})
+    end,
   },
   -- }}}
   -- Only for recordings {{{---------------------------------------------------

@@ -12,6 +12,9 @@ opt.listchars = "tab:▸ ,eol:¬,nbsp:␣,extends:›,precedes:‹"
 opt.ignorecase = true
 opt.smartcase = true
 
+opt.wrap = true
+opt.linebreak = true
+
 vim.cmd("filetype plugin indent on")
 opt.expandtab = true
 opt.shiftwidth = 2
