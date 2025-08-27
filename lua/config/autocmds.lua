@@ -53,33 +53,9 @@ if package.loaded["lazy"] then
   end
 
   if utils.is_plugin_registered("nvim-treesitter") then
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = { '<filetype>' },
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "<filetype>" },
       callback = function() vim.treesitter.start() end,
-    })
-  end
-
-  -- Restore macro notifications
-  if utils.is_plugin_registered("nvim-notify") then
-    vim.api.nvim_create_autocmd("RecordingEnter", {
-      callback = function()
-        local reg = vim.fn.reg_recording()
-        require("notify")(
-          "Recording macro @" .. reg,
-          "info",
-          { title = "Macro", timeout = 1000 }
-        )
-      end,
-    })
-
-    vim.api.nvim_create_autocmd("RecordingLeave", {
-      callback = function()
-        require("notify")(
-          "Stopped recording",
-          "info",
-          { title = "Macro", timeout = 700 }
-        )
-      end,
     })
   end
 end

@@ -138,11 +138,20 @@ local plugin_list = {
     config = function() require("mini.pairs").setup({}) end,
   },
   {
+    "windwp/nvim-ts-autotag",
+    event = "VeryLazy",
+    config = function() require("nvim-ts-autotag").setup() end,
+  },
+  {
     "echasnovski/mini.surround",
     event = "VeryLazy",
-    config = function()
-      require("mini.surround").setup({ respect_selection_type = true })
-    end,
+    config = function() require("mini.surround").setup({ respect_selection_type = true }) end,
+  },
+  {
+    "brianhuster/live-preview.nvim",
+    event = "VeryLazy",
+    dependencies = { "echasnovski/mini.pick" },
+    opts = { port = 5501 }, -- There was a conflict, not sure with what...
   },
   --}}}
   -- UI Behavior {{{-----------------------------------------------------------
@@ -159,10 +168,7 @@ local plugin_list = {
     event = "VeryLazy",
     config = function()
       require("mini.files").setup({
-        windows = {
-          preview = true,
-          width_preview = 60,
-        },
+        windows = { preview = true, width_preview = 60 },
       })
     end,
   },
@@ -195,9 +201,7 @@ local plugin_list = {
         config = function() require("mini.diff").setup({}) end,
       },
     },
-    config = function()
-      require("mini.statusline").setup({ use_icons = ENABLE_NERD_FONTS })
-    end,
+    config = function() require("mini.statusline").setup({ use_icons = ENABLE_NERD_FONTS }) end,
   },
   {
     "hiphish/rainbow-delimiters.nvim",

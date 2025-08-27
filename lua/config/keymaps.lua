@@ -30,7 +30,6 @@ api.nvim_create_user_command("Journal", function()
   vim.cmd("edit " .. path)
 end, {})
 
-
 -- For recording
 if vim.g.neovide then
   api.nvim_create_user_command("Trans", function()
@@ -66,24 +65,9 @@ keymap.set("c", "<C-e>", "<End>") -- I think blink breaks this?
 
 -- Firefox-style tab switching
 for i = 1, 8 do
-  keymap.set(
-    "n",
-    "<M-" .. i .. ">",
-    "<Cmd>tabnext " .. i .. "<CR>",
-    { silent = true }
-  )
-  keymap.set(
-    "t",
-    "<M-" .. i .. ">",
-    "<Cmd>tabnext " .. i .. "<CR>",
-    { silent = true }
-  )
-  keymap.set(
-    "i",
-    "<M-" .. i .. ">",
-    "<Cmd>tabnext " .. i .. "<CR>",
-    { silent = true }
-  )
+  keymap.set("n", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
+  keymap.set("t", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
+  keymap.set("i", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
 end
 keymap.set("n", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
 keymap.set("t", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
@@ -91,12 +75,8 @@ keymap.set("i", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
 
 -- Plugin Bindings ------------------------------------------------------------
 if package.loaded["lazy"] then
-  if utils.is_plugin_registered("mini.files") then
-    keymap.set("n", "<leader>e", "<Cmd>lua MiniFiles.open()<CR>")
-  end
-  if utils.is_plugin_registered("mini.pick") then
-    keymap.set("n", "<leader>f", "<Cmd>Pick files<CR>")
-  end
+  if utils.is_plugin_registered("mini.files") then keymap.set("n", "<leader>e", "<Cmd>lua MiniFiles.open()<CR>") end
+  if utils.is_plugin_registered("mini.pick") then keymap.set("n", "<leader>f", "<Cmd>Pick files<CR>") end
 end
 
 -- blink.cmp has its own keymaps in its setup as well
