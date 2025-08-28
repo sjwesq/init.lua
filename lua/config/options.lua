@@ -33,7 +33,7 @@ opt.undofile = true
 
 vim.diagnostic.config({
   virtual_text = {
-    prefix = ENABLE_NERD_FONTS and " " or "[!]",
+    prefix = vim.g.enable_nerd_fonts and " " or "[!]",
     spacing = 2,
   },
 })

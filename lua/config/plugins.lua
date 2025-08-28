@@ -268,7 +268,7 @@ local plugin_list = {
   {
     "nvim-mini/mini.icons",
     event = "VeryLazy",
-    config = { style = ENABLE_NERD_FONTS and "default" or "ascii" },
+    config = { style = vim.g.enable_nerd_fonts and "default" or "ascii" },
   },
   {
     "nvim-mini/mini.statusline",
@@ -287,7 +287,7 @@ local plugin_list = {
       },
     },
     config = function()
-      require("mini.statusline").setup({ use_icons = ENABLE_NERD_FONTS })
+      require("mini.statusline").setup({ use_icons = vim.g.enable_nerd_fonts })
     end,
   },
   {

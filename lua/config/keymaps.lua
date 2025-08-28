@@ -17,11 +17,12 @@ api.nvim_create_user_command("Journal", function()
   local quarter = "Q" .. math.floor((month - 1) / 3 + 1)
   local dayfile = os.date("%m-%d") .. ".md"
 
-  local dir = string.format("%s/%s/%s", DIR_JOURNAL, year, quarter)
+  local dir = string.format("%s/%s/%s", vim.g.dir_journal, year, quarter)
   dir = vim.fn.expand(dir)
   vim.fn.mkdir(dir, "p")
 
-  local path = string.format("%s/%s/%s/%s", DIR_JOURNAL, year, quarter, dayfile)
+  local path =
+    string.format("%s/%s/%s/%s", vim.g.dir_journal, year, quarter, dayfile)
   path = vim.fn.expand(path)
   if vim.fn.filereadable(path) == 0 then
     local header =
@@ -95,11 +96,11 @@ keymap.set("i", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
 -- Plugin Bindings ------------------------------------------------------------
 if package.loaded["lazy"] then
   if utils.is_plugin_registered("mini.files") then
-    keymap.set("n", "<leader>e", "<Cmd>lua MiniFiles.open()<CR>")
+    keymap.set("n", "<leader>e", MiniFiles.open)
   end
 
   if utils.is_plugin_registered("mini.pick") then
-    keymap.set("n", "<leader>f", "<Cmd>Pick files<CR>")
+    keymap.set("n", "<leader>f", MiniPick.builtin.files)
   end
 
   if utils.is_plugin_registered("nvim-dap") then
