@@ -1,4 +1,4 @@
-vim.g.enable_nerd_fonts = false
+vim.g.enable_nerd_fonts = true
 vim.g.dir_journal = "~/Sync/notes/journal"
 
 require("config.options")
