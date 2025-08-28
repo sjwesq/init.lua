@@ -175,6 +175,7 @@ local plugin_list = {
       require("conform").setup({
         formatters_by_ft = {
           lua = { "stylua" },
+          sh = { "shfmt" },
         },
       })
       require("conform").formatters.stylua = {
@@ -186,6 +187,9 @@ local plugin_list = {
           "--column-width",
           "80",
         },
+      }
+      require("conform").formatters.shfmt = {
+        append_args = { "-i", "2", "-ci", "-s" },
       }
     end,
   },
