@@ -54,18 +54,6 @@ local plugin_list = {
   {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
-    config = function()
-      local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({
-        settings = {
-          Lua = {
-            workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
-          },
-        },
-      })
-    end,
   },
   {
     "mason-org/mason.nvim",
@@ -120,6 +108,50 @@ local plugin_list = {
         },
 
         auto_install = true,
+      })
+    end,
+  },
+  {
+    "folke/lazydev.nvim" ,
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  -- }}}
+  -- Debugging {{{-------------------------------------------------------------
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = {
+      {
+        "mfussenegger/nvim-dap",
+        "nvim-neotest/nvim-nio",
+      },
+    },
+    config = function() require("dapui").setup() end,
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    event = "VeryLazy",
+    dependencies = {
+      { "mfussenegger/nvim-dap", },
+    },
+    config = function() require("nvim-dap-virtual-text").setup() end,
+  },
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "mason-org/mason.nvim",
+      "mfussenegger/nvim-dap", },
+    config = function()
+      require("mason-nvim-dap").setup({
+        automatic_installation = true,
+        ensure_installed = {},
+        handlers = {},
       })
     end,
   },

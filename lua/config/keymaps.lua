@@ -76,7 +76,24 @@ keymap.set("i", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
 -- Plugin Bindings ------------------------------------------------------------
 if package.loaded["lazy"] then
   if utils.is_plugin_registered("mini.files") then keymap.set("n", "<leader>e", "<Cmd>lua MiniFiles.open()<CR>") end
+
   if utils.is_plugin_registered("mini.pick") then keymap.set("n", "<leader>f", "<Cmd>Pick files<CR>") end
+
+  if utils.is_plugin_registered("nvim-dap") then
+    vim.keymap.set("n", "<Leader>dc", function() require("dap").continue() end)
+    vim.keymap.set("n", "<C-n>", function() require("dap").step_over() end)
+    vim.keymap.set("n", "<Leader>di", function() require("dap").step_into() end)
+    vim.keymap.set("n", "<Leader>do", function() require("dap").step_out() end)
+    vim.keymap.set("n", "<Leader>db", function() require("dap").toggle_breakpoint() end)
+    vim.keymap.set("n", "<Leader>dB", function() require("dap").set_breakpoint() end)
+    vim.keymap.set("n", "<Leader>dl", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end)
+    vim.keymap.set("n", "<Leader>dr", function() require("dap").repl.open() end)
+    vim.keymap.set("n", "<Leader>dp", function() require("dap").run_last() end)
+  end
+
+  if utils.is_plugin_registered("nvim-dap-ui") then
+    vim.keymap.set("n", "<Leader>dv", function() require("dapui").toggle() end)
+  end
 end
 
 -- blink.cmp has its own keymaps in its setup as well
