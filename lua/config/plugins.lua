@@ -4,7 +4,7 @@
 -- but... A single file just loads a bit faster (:
 
 local plugin_list = {
-  -- Completion {{{------------------------------------------------------------
+  -- Completion ------------------------------------------------------------
   {
     "saghen/blink.cmp",
     event = "VeryLazy",
@@ -15,7 +15,9 @@ local plugin_list = {
         version = "2.*",
         run = "make install_jsregexp",
         dependencies = { "rafamadriz/friendly-snippets" },
-        config = function() require("luasnip.loaders.from_vscode").lazy_load() end,
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+        end,
       },
       {
         "neovim/nvim-lspconfig",
@@ -49,8 +51,8 @@ local plugin_list = {
       },
     },
   },
-  -- }}}
-  -- LSP/Linter Configuration {{{----------------------------------------------
+
+  -- LSP/Linter Configuration ----------------------------------------------
   {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
@@ -58,7 +60,9 @@ local plugin_list = {
   {
     "mason-org/mason.nvim",
     event = "VeryLazy",
-    config = function() require("mason").setup() end,
+    config = function()
+      require("mason").setup()
+    end,
   },
   {
     "mason-org/mason-lspconfig.nvim",
@@ -88,7 +92,9 @@ local plugin_list = {
     "rshkarin/mason-nvim-lint",
     event = "VeryLazy",
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-lint" },
-    config = function() require("mason-nvim-lint").setup() end,
+    config = function()
+      require("mason-nvim-lint").setup()
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -112,7 +118,7 @@ local plugin_list = {
     end,
   },
   {
-    "folke/lazydev.nvim" ,
+    "folke/lazydev.nvim",
     ft = "lua",
     opts = {
       library = {
@@ -120,8 +126,8 @@ local plugin_list = {
       },
     },
   },
-  -- }}}
-  -- Debugging {{{-------------------------------------------------------------
+
+  -- Debugging -------------------------------------------------------------
   {
     "rcarriga/nvim-dap-ui",
     event = "VeryLazy",
@@ -131,22 +137,27 @@ local plugin_list = {
         "nvim-neotest/nvim-nio",
       },
     },
-    config = function() require("dapui").setup() end,
+    config = function()
+      require("dapui").setup()
+    end,
   },
   {
     "theHamsta/nvim-dap-virtual-text",
     event = "VeryLazy",
     dependencies = {
-      { "mfussenegger/nvim-dap", },
+      { "mfussenegger/nvim-dap" },
     },
-    config = function() require("nvim-dap-virtual-text").setup() end,
+    config = function()
+      require("nvim-dap-virtual-text").setup({})
+    end,
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
     event = "VeryLazy",
     dependencies = {
       "mason-org/mason.nvim",
-      "mfussenegger/nvim-dap", },
+      "mfussenegger/nvim-dap",
+    },
     config = function()
       require("mason-nvim-dap").setup({
         automatic_installation = true,
@@ -155,42 +166,78 @@ local plugin_list = {
       })
     end,
   },
-  -- }}}
-  -- Text Editing {{{----------------------------------------------------------
+
+  -- Text Editing ----------------------------------------------------------
   {
-    "echasnovski/mini.align",
+    "stevearc/conform.nvim",
     event = "VeryLazy",
-    config = {
-      function() require("mini.align").setup() end,
-    },
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          lua = { "stylua" },
+        },
+      })
+      require("conform").formatters.stylua = {
+        append_args = {
+          "--indent-type",
+          "Spaces",
+          "--indent-width",
+          "2",
+          "--column-width",
+          "80",
+        },
+      }
+    end,
   },
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.align",
     event = "VeryLazy",
-    config = function() require("mini.pairs").setup({}) end,
+    config = function()
+      require("mini.align").setup()
+    end,
+  },
+  {
+    "nvim-mini/mini.pairs",
+    event = "VeryLazy",
+    config = function()
+      require("mini.pairs").setup({})
+    end,
   },
   {
     "windwp/nvim-ts-autotag",
     event = "VeryLazy",
-    config = function() require("nvim-ts-autotag").setup() end,
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     event = "VeryLazy",
-    config = function() require("mini.surround").setup({ respect_selection_type = true }) end,
+    config = function()
+      require("mini.surround").setup({ respect_selection_type = true })
+    end,
   },
-  --}}}
-  -- UI Behavior {{{-----------------------------------------------------------
   {
-    "echasnovski/mini.animate",
+    "nvim-mini/mini.splitjoin",
+    event = "VeryLazy",
+    config = function()
+      require("mini.splitjoin").setup()
+    end,
+  },
+  --
+  -- UI Behavior -----------------------------------------------------------
+  {
+    "nvim-mini/mini.animate",
     event = "VeryLazy",
     cond = not vim.g.neovide,
     config = {
-      function() require("mini.animate").setup() end,
+      function()
+        require("mini.animate").setup()
+      end,
     },
   },
   {
-    "echasnovski/mini.files",
+    "nvim-mini/mini.files",
     event = "VeryLazy",
     config = function()
       require("mini.files").setup({
@@ -199,35 +246,45 @@ local plugin_list = {
     end,
   },
   {
-    "echasnovski/mini.pick",
+    "nvim-mini/mini.pick",
     event = "VeryLazy",
-    config = function() require("mini.pick").setup({}) end,
+    config = function()
+      require("mini.pick").setup({})
+    end,
   },
-  -- }}}
-  -- UI Appearance {{{---------------------------------------------------------
+
+  -- UI Appearance ---------------------------------------------------------
   {
     "sainnhe/everforest",
-    init = function() vim.cmd.colorscheme("everforest") end,
+    init = function()
+      vim.cmd.colorscheme("everforest")
+    end,
     priority = 1000, -- ensure this loads first
   },
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     event = "VeryLazy",
     config = { style = ENABLE_NERD_FONTS and "default" or "ascii" },
   },
   {
-    "echasnovski/mini.statusline",
+    "nvim-mini/mini.statusline",
     dependencies = {
       {
-        "echasnovski/mini-git",
-        config = function() require("mini.git").setup({}) end,
+        "nvim-mini/mini-git",
+        config = function()
+          require("mini.git").setup({})
+        end,
       },
       {
-        "echasnovski/mini.diff",
-        config = function() require("mini.diff").setup({}) end,
+        "nvim-mini/mini.diff",
+        config = function()
+          require("mini.diff").setup({})
+        end,
       },
     },
-    config = function() require("mini.statusline").setup({ use_icons = ENABLE_NERD_FONTS }) end,
+    config = function()
+      require("mini.statusline").setup({ use_icons = ENABLE_NERD_FONTS })
+    end,
   },
   {
     "hiphish/rainbow-delimiters.nvim",
@@ -239,11 +296,10 @@ local plugin_list = {
       require("nvim-highlight-colors").setup({})
     end,
   },
-  -- }}}
-  -- Only for recordings {{{---------------------------------------------------
+
+  -- Only for recordings ---------------------------------------------------
   {
     "NStefan002/screenkey.nvim",
-    event = "VeryLazy",
     enabled = false,
     dependencies = {
       "rcarriga/nvim-notify",
@@ -260,10 +316,9 @@ local plugin_list = {
       vim.cmd("Screenkey")
     end,
   },
-  -- }}}
 }
 
---- lazy.nvim Boostrap {{{-----------------------------------------------------
+--- lazy.nvim Boostrap -----------------------------------------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -285,9 +340,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     os.exit(1)
   end
 end
--- }}}
 
--- lazy.nvim Setup {{{---------------------------------------------------------
+-- lazy.nvim Setup ---------------------------------------------------------
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
@@ -311,4 +365,3 @@ require("lazy").setup({
     },
   },
 })
--- }}}

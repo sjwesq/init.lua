@@ -24,7 +24,8 @@ api.nvim_create_user_command("Journal", function()
   local path = string.format("%s/%s/%s/%s", DIR_JOURNAL, year, quarter, dayfile)
   path = vim.fn.expand(path)
   if vim.fn.filereadable(path) == 0 then
-    local header = string.format("# %s (%s)", os.date("%Y-%m-%d"), os.date("%A"))
+    local header =
+      string.format("# %s (%s)", os.date("%Y-%m-%d"), os.date("%A"))
     vim.fn.writefile({ header }, path)
   end
   vim.cmd("edit " .. path)
@@ -50,7 +51,6 @@ keymap.set("n", "<leader>d", "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
 -- LSP renaming
 keymap.set("n", "<leader>r", vim.lsp.buf.rename)
 
-
 -- Ctrl-S to save
 keymap.set("i", "<C-s>", "<Cmd>w<CR>")
 keymap.set("n", "<C-s>", "<Cmd>w<CR>")
@@ -69,9 +69,24 @@ keymap.set("c", "<C-e>", "<End>") -- I think blink breaks this?
 
 -- Firefox-style tab switching
 for i = 1, 8 do
-  keymap.set("n", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
-  keymap.set("t", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
-  keymap.set("i", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>", { silent = true })
+  keymap.set(
+    "n",
+    "<M-" .. i .. ">",
+    "<Cmd>tabnext " .. i .. "<CR>",
+    { silent = true }
+  )
+  keymap.set(
+    "t",
+    "<M-" .. i .. ">",
+    "<Cmd>tabnext " .. i .. "<CR>",
+    { silent = true }
+  )
+  keymap.set(
+    "i",
+    "<M-" .. i .. ">",
+    "<Cmd>tabnext " .. i .. "<CR>",
+    { silent = true }
+  )
 end
 keymap.set("n", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
 keymap.set("t", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
@@ -79,24 +94,61 @@ keymap.set("i", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
 
 -- Plugin Bindings ------------------------------------------------------------
 if package.loaded["lazy"] then
-  if utils.is_plugin_registered("mini.files") then keymap.set("n", "<leader>e", "<Cmd>lua MiniFiles.open()<CR>") end
+  if utils.is_plugin_registered("mini.files") then
+    keymap.set("n", "<leader>e", "<Cmd>lua MiniFiles.open()<CR>")
+  end
 
-  if utils.is_plugin_registered("mini.pick") then keymap.set("n", "<leader>f", "<Cmd>Pick files<CR>") end
+  if utils.is_plugin_registered("mini.pick") then
+    keymap.set("n", "<leader>f", "<Cmd>Pick files<CR>")
+  end
 
   if utils.is_plugin_registered("nvim-dap") then
-    vim.keymap.set("n", "<F5>", function() require("dap").continue() end)
-    vim.keymap.set("n", "<F10>", function() require("dap").step_into() end)
-    vim.keymap.set("n", "<F11>", function() require("dap").step_over() end)
-    vim.keymap.set("n", "<F12>", function() require("dap").step_out() end)
-    vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end)
-    vim.keymap.set("n", "<leader>dB", function() require("dap").set_breakpoint() end)
-    vim.keymap.set("n", "<leader>dl", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end)
-    vim.keymap.set("n", "<leader>dr", function() require("dap").repl.open() end)
-    vim.keymap.set("n", "<leader>da", function() require("dap").run_last() end)
+    vim.keymap.set("n", "<F5>", function()
+      require("dap").continue()
+    end)
+    vim.keymap.set("n", "<F10>", function()
+      require("dap").step_into()
+    end)
+    vim.keymap.set("n", "<F11>", function()
+      require("dap").step_over()
+    end)
+    vim.keymap.set("n", "<F12>", function()
+      require("dap").step_out()
+    end)
+    vim.keymap.set("n", "<leader>db", function()
+      require("dap").toggle_breakpoint()
+    end)
+    vim.keymap.set("n", "<leader>dB", function()
+      require("dap").set_breakpoint()
+    end)
+    vim.keymap.set("n", "<leader>dl", function()
+      require("dap").set_breakpoint(
+        nil,
+        nil,
+        vim.fn.input("Log point message: ")
+      )
+    end)
+    vim.keymap.set("n", "<leader>dr", function()
+      require("dap").repl.open()
+    end)
+    vim.keymap.set("n", "<leader>da", function()
+      require("dap").run_last()
+    end)
   end
 
   if utils.is_plugin_registered("nvim-dap-ui") then
-    vim.keymap.set("n", "<leader>dv", function() require("dapui").toggle() end)
+    vim.keymap.set("n", "<leader>dv", function()
+      require("dapui").toggle()
+    end)
+  end
+
+  if utils.is_plugin_registered("conform.nvim") then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*",
+      callback = function(args)
+        require("conform").format({ bufnr = args.buf })
+      end,
+    })
   end
 end
 

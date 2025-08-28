@@ -5,7 +5,9 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   callback = function()
     local save_cursor = vim.fn.getpos(".")
-    pcall(function() vim.cmd([[%s/\s\+$//e]]) end)
+    pcall(function()
+      vim.cmd([[%s/\s\+$//e]])
+    end)
     vim.fn.setpos(".", save_cursor)
   end,
 })
@@ -25,7 +27,9 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 
 vim.api.nvim_create_autocmd("TermOpen", {
-  callback = function() vim.opt_local.spell = false end,
+  callback = function()
+    vim.opt_local.spell = false
+  end,
 })
 
 -- Enter insert mode when switching to terminal tab
@@ -47,7 +51,9 @@ if package.loaded["lazy"] then
     vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
       callback = function()
         local lint_status, lint = pcall(require, "lint")
-        if lint_status then lint.try_lint() end
+        if lint_status then
+          lint.try_lint()
+        end
       end,
     })
   end
@@ -55,7 +61,9 @@ if package.loaded["lazy"] then
   if utils.is_plugin_registered("nvim-treesitter") then
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "<filetype>" },
-      callback = function() vim.treesitter.start() end,
+      callback = function()
+        vim.treesitter.start()
+      end,
     })
   end
 end
