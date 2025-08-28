@@ -47,6 +47,10 @@ keymap.set("n", "<leader>h", "<Cmd>nohl<CR>")
 -- Set current directory to file
 keymap.set("n", "<leader>d", "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
 
+-- LSP renaming
+keymap.set("n", "<leader>r", vim.lsp.buf.rename)
+
+
 -- Ctrl-S to save
 keymap.set("i", "<C-s>", "<Cmd>w<CR>")
 keymap.set("n", "<C-s>", "<Cmd>w<CR>")
@@ -84,15 +88,15 @@ if package.loaded["lazy"] then
     vim.keymap.set("n", "<F10>", function() require("dap").step_into() end)
     vim.keymap.set("n", "<F11>", function() require("dap").step_over() end)
     vim.keymap.set("n", "<F12>", function() require("dap").step_out() end)
-    vim.keymap.set("n", "<Leader>db", function() require("dap").toggle_breakpoint() end)
-    vim.keymap.set("n", "<Leader>dB", function() require("dap").set_breakpoint() end)
-    vim.keymap.set("n", "<Leader>dl", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end)
-    vim.keymap.set("n", "<Leader>dr", function() require("dap").repl.open() end)
-    vim.keymap.set("n", "<Leader>da", function() require("dap").run_last() end)
+    vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end)
+    vim.keymap.set("n", "<leader>dB", function() require("dap").set_breakpoint() end)
+    vim.keymap.set("n", "<leader>dl", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end)
+    vim.keymap.set("n", "<leader>dr", function() require("dap").repl.open() end)
+    vim.keymap.set("n", "<leader>da", function() require("dap").run_last() end)
   end
 
   if utils.is_plugin_registered("nvim-dap-ui") then
-    vim.keymap.set("n", "<Leader>dv", function() require("dapui").toggle() end)
+    vim.keymap.set("n", "<leader>dv", function() require("dapui").toggle() end)
   end
 end
 
