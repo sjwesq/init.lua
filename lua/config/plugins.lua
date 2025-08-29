@@ -307,6 +307,7 @@ local plugin_list = {
   },
   {
     "brenoprata10/nvim-highlight-colors",
+    ft = { "html", "xml", "conf" },
     config = function()
       require("nvim-highlight-colors").setup({})
     end,
