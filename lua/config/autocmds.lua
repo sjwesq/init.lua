@@ -66,4 +66,13 @@ if package.loaded["lazy"] then
       end,
     })
   end
+
+  if utils.is_plugin_registered("conform.nvim") then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*",
+      callback = function(args)
+        require("conform").format({ bufnr = args.buf })
+      end,
+    })
+  end
 end

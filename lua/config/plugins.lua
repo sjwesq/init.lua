@@ -3,8 +3,10 @@
 -- The lazy.vim documentation recommended having a separate plugin folder,
 -- but... A single file just loads a bit faster (:
 
+local plugins_dap = {} -- for lazy-loading purposes
+
 local plugin_list = {
-  -- Completion ------------------------------------------------------------
+  -- Completion {{{------------------------------------------------------------
   {
     "saghen/blink.cmp",
     event = "VeryLazy",
@@ -51,8 +53,8 @@ local plugin_list = {
       },
     },
   },
-
-  -- LSP/Linter Configuration ----------------------------------------------
+  -- }}}
+  -- LSP/Linter Configuration {{{----------------------------------------------
   {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
@@ -127,33 +129,40 @@ local plugin_list = {
     },
   },
 
-  -- Debugging -------------------------------------------------------------
+  -- }}}
+  -- Debugging {{{-------------------------------------------------------------
   {
     "rcarriga/nvim-dap-ui",
-    event = "VeryLazy",
+    lazy = true,
     dependencies = {
-      {
-        "mfussenegger/nvim-dap",
-        "nvim-neotest/nvim-nio",
-      },
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
     },
     config = function()
       require("dapui").setup()
     end,
   },
   {
+    "mfussenegger/nvim-dap",
+    lazy = true,
+    config = function()
+      require("lazy").load({ plugins = plugins_dap })
+    end,
+  },
+  {
     "theHamsta/nvim-dap-virtual-text",
-    event = "VeryLazy",
+    lazy = true,
     dependencies = {
       { "mfussenegger/nvim-dap" },
     },
     config = function()
-      require("nvim-dap-virtual-text").setup({})
+      require("nvim-dap-virtual-text").setup()
     end,
+    init = table.insert(plugins_dap, "nvim-dap-virtual-text"),
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
-    event = "VeryLazy",
+    lazy = true,
     dependencies = {
       "mason-org/mason.nvim",
       "mfussenegger/nvim-dap",
@@ -165,12 +174,14 @@ local plugin_list = {
         handlers = {},
       })
     end,
+    init = table.insert(plugins_dap, "mason-nvim-dap.nvim"),
   },
 
-  -- Text Editing ----------------------------------------------------------
+  -- }}}
+  -- Text Editing {{{----------------------------------------------------------
   {
     "stevearc/conform.nvim",
-    event = "VeryLazy",
+    event = "BufWritePre",
     config = function()
       require("conform").setup({
         formatters_by_ft = {
@@ -209,7 +220,7 @@ local plugin_list = {
   },
   {
     "windwp/nvim-ts-autotag",
-    event = "VeryLazy",
+    ft = { "html", "xml" },
     config = function()
       require("nvim-ts-autotag").setup()
     end,
@@ -229,16 +240,15 @@ local plugin_list = {
     end,
   },
   --
-  -- UI Behavior -----------------------------------------------------------
+  -- }}}
+  -- UI Behavior {{{-----------------------------------------------------------
   {
     "nvim-mini/mini.animate",
     event = "VeryLazy",
     cond = not vim.g.neovide,
-    config = {
-      function()
-        require("mini.animate").setup()
-      end,
-    },
+    config = function()
+      require("mini.animate").setup()
+    end,
   },
   {
     "nvim-mini/mini.files",
@@ -257,10 +267,11 @@ local plugin_list = {
     end,
   },
 
-  -- UI Appearance ---------------------------------------------------------
+  -- }}}
+  -- UI Appearance {{{---------------------------------------------------------
   {
     "sainnhe/everforest",
-    init = function()
+    config = function()
       vim.cmd.colorscheme("everforest")
     end,
     priority = 1000, -- ensure this loads first
@@ -301,7 +312,8 @@ local plugin_list = {
     end,
   },
 
-  -- Only for recordings ---------------------------------------------------
+  -- }}}
+  -- Only for recordings {{{---------------------------------------------------
   {
     "NStefan002/screenkey.nvim",
     enabled = false,
@@ -320,9 +332,10 @@ local plugin_list = {
       vim.cmd("Screenkey")
     end,
   },
+  -- }}}
 }
 
---- lazy.nvim Boostrap -----------------------------------------------------
+-- lazy.nvim Boostrap {{{------------------------------------------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -345,7 +358,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 
--- lazy.nvim Setup ---------------------------------------------------------
+-- lazy.nvim Setup {{{---------------------------------------------------------
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
@@ -369,3 +382,4 @@ require("lazy").setup({
     },
   },
 })
+-- }}}

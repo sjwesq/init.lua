@@ -47,7 +47,7 @@ keymap.set("n", "<C-m>", "gM")
 keymap.set("n", "<leader>h", "<Cmd>nohl<CR>")
 
 -- Set current directory to file
-keymap.set("n", "<leader>d", "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
+keymap.set("n", "<leader>cd", "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
 
 -- LSP renaming
 keymap.set("n", "<leader>r", vim.lsp.buf.rename)
@@ -141,15 +141,6 @@ if package.loaded["lazy"] then
     vim.keymap.set("n", "<leader>dv", function()
       require("dapui").toggle()
     end)
-  end
-
-  if utils.is_plugin_registered("conform.nvim") then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = "*",
-      callback = function(args)
-        require("conform").format({ bufnr = args.buf })
-      end,
-    })
   end
 end
 
