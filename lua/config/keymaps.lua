@@ -61,10 +61,10 @@ keymap.set("n", "<M-w>", "<Cmd>bd<CR>")
 keymap.set("n", "<M-S-w>", "<Cmd>w|bd<CR>")
 
 -- Quick window navigation
-keymap.set("n", "<C-h>", "<Cmd>wincmd h<CR>", { silent = true })
-keymap.set("n", "<C-j>", "<Cmd>wincmd j<CR>", { silent = true })
-keymap.set("n", "<C-k>", "<Cmd>wincmd k<CR>", { silent = true })
-keymap.set("n", "<C-l>", "<Cmd>wincmd l<CR>", { silent = true })
+keymap.set("n", "<M-h>", "<Cmd>wincmd h<CR>", { silent = true })
+keymap.set("n", "<M-j>", "<Cmd>wincmd j<CR>", { silent = true })
+keymap.set("n", "<M-k>", "<Cmd>wincmd k<CR>", { silent = true })
+keymap.set("n", "<M-l>", "<Cmd>wincmd l<CR>", { silent = true })
 
 keymap.set("c", "<C-e>", "<End>") -- I think blink breaks this?
 
@@ -141,6 +141,15 @@ if package.loaded["lazy"] then
     vim.keymap.set("n", "<leader>dv", function()
       require("dapui").toggle()
     end)
+  end
+  if utils.is_plugin_registered("nvim-tmux-navigation") then
+    local nvim_tmux_nav = require("nvim-tmux-navigation")
+    keymap.set("n", "<M-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+    keymap.set("n", "<M-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+    keymap.set("n", "<M-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+    keymap.set("n", "<M-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+    keymap.set("n", "<M-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+    keymap.set("n", "<M-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
   end
 end
 
