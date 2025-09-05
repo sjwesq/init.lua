@@ -10,6 +10,9 @@ local keymap = vim.keymap
 
 api.nvim_create_user_command("Vimrc", "edit " .. vim.fn.stdpath("config"), {})
 api.nvim_create_user_command("Wordify", "g/./,/^$/join", {})
+api.nvim_create_user_command("ConformToggle", function()
+  vim.g.enable_conform = not vim.g.enable_conform
+end, {})
 
 api.nvim_create_user_command("Journal", function()
   local year = os.date("%Y")
