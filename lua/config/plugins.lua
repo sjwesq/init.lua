@@ -183,12 +183,23 @@ local plugin_list = {
     "stevearc/conform.nvim",
     event = "BufWritePre",
     config = function()
-      require("conform").setup({
-        formatters_by_ft = {
-          lua = { "stylua" },
-          sh = { "shfmt" },
-        },
-      })
+      local fmt = {}
+      local fmt_multiassign = function(table_input, formatter)
+        for _, ft in ipairs(table_input) do
+          fmt[ft] = { formatter }
+        end
+      end
+
+      local ft_clang = { "c", "cpp", "cs", "java" }
+      fmt_multiassign(ft_clang, "clang-format")
+      local ft_prettier = { "html", "css", "javascript", "typescript", "json" }
+      fmt_multiassign(ft_prettier, "prettier")
+      fmt["lua"] = { "stylua" }
+      fmt["sh"] = { "shfmt" }
+      fmt["python"] = { "autopep8" }
+      fmt["go"] = { "gofumpt" }
+
+      require("conform").setup({ formatters_by_ft = fmt })
       require("conform").formatters.stylua = {
         append_args = {
           "--indent-type",
@@ -201,6 +212,9 @@ local plugin_list = {
       }
       require("conform").formatters.shfmt = {
         append_args = { "-i", "2", "-ci", "-s" },
+      }
+      require("conform").formatters.clang_format = {
+        append_args = { "--style=Google" },
       }
     end,
   },
