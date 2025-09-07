@@ -257,14 +257,6 @@ local plugin_list = {
   -- }}}
   -- UI Behavior {{{-----------------------------------------------------------
   {
-    "nvim-mini/mini.animate",
-    event = "VeryLazy",
-    cond = not vim.g.neovide,
-    config = function()
-      require("mini.animate").setup()
-    end,
-  },
-  {
     "nvim-mini/mini.files",
     event = "VeryLazy",
     config = function()
