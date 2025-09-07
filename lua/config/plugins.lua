@@ -191,12 +191,12 @@ local plugin_list = {
       end
 
       local ft_clang = { "c", "cpp", "cs", "java" }
-      fmt_multiassign(ft_clang, "clang-format")
+      fmt_multiassign(ft_clang, "clang_format")
       local ft_prettier = { "html", "css", "javascript", "typescript", "json" }
       fmt_multiassign(ft_prettier, "prettier")
       fmt["lua"] = { "stylua" }
       fmt["sh"] = { "shfmt" }
-      fmt["python"] = { "autopep8" }
+      fmt["python"] = { "black" }
       fmt["go"] = { "gofumpt" }
 
       require("conform").setup({ formatters_by_ft = fmt })
@@ -214,6 +214,7 @@ local plugin_list = {
         append_args = { "-i", "2", "-ci", "-s" },
       }
       require("conform").formatters.clang_format = {
+        command = "clang-format",
         append_args = { "--style=Google" },
       }
     end,
