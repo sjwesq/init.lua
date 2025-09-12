@@ -231,11 +231,9 @@ local plugin_list = {
     end,
   },
   {
-    "nvim-mini/mini.pairs",
-    event = "VeryLazy",
-    config = function()
-      require("mini.pairs").setup({})
-    end,
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
   },
   {
     "windwp/nvim-ts-autotag",
