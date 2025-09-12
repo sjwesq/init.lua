@@ -198,6 +198,7 @@ local plugin_list = {
       fmt["sh"] = { "shfmt" }
       fmt["python"] = { "black" }
       fmt["go"] = { "gofumpt" }
+      fmt["tex"] = { "latexindent" }
 
       require("conform").setup({ formatters_by_ft = fmt })
       require("conform").formatters.stylua = {
@@ -216,6 +217,9 @@ local plugin_list = {
       require("conform").formatters.clang_format = {
         command = "clang-format",
         append_args = { "--style=Google" },
+      }
+      require("conform").formatters.latexindent = {
+        append_args = { "-g", "/dev/null" },
       }
     end,
   },
