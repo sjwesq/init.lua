@@ -46,14 +46,12 @@ end
 -- Keymaps --------------------------------------------------------------------
 keymap.set("n", "<C-m>", "gM")
 
--- Remove search highlight
+keymap.set("n", "<leader>m", "<Cmd>make<CR>")
 keymap.set("n", "<leader>h", "<Cmd>nohl<CR>")
+keymap.set("n", "<leader>r", vim.lsp.buf.rename)
 
 -- Set current directory to file
 keymap.set("n", "<leader>cd", "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
-
--- LSP renaming
-keymap.set("n", "<leader>r", vim.lsp.buf.rename)
 
 -- Ctrl-S to save
 keymap.set("i", "<C-s>", "<Cmd>w<CR>")
