@@ -279,6 +279,13 @@ local plugin_list = {
       require("nvim-tmux-navigation").setup({})
     end,
   },
+  {
+    "psliwka/vim-dirtytalk",
+    build = ":DirtytalkUpdate",
+    config = function()
+      vim.opt.spelllang = { "en", "programming" }
+    end,
+  },
   -- }}}
   -- UI Appearance {{{---------------------------------------------------------
   {

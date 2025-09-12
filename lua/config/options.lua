@@ -21,6 +21,7 @@ opt.shiftwidth = 2
 opt.backspace = "indent,eol,start"
 opt.spell = true
 opt.spelllang = "en_us"
+opt.spelloptions = "camel"
 opt.wildmenu = true
 opt.hidden = true
 opt.confirm = true
