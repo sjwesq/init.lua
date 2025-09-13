@@ -26,21 +26,12 @@ vim.api.nvim_create_autocmd("CursorHold", {
   end,
 })
 
-vim.api.nvim_create_autocmd("TermOpen", {
-  callback = function()
-    vim.opt_local.spell = false
-  end,
-})
-
 -- Enter insert mode when switching to terminal tab
-vim.api.nvim_create_autocmd({ "TabEnter" }, {
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "term://*",
   callback = function()
-    if #vim.api.nvim_tabpage_list_wins(0) == 1 then
-      vim.cmd("startinsert")
-    else
-      vim.cmd("stopinsert")
-    end
+    vim.opt_local.spell = false
+    vim.cmd("startinsert")
   end,
 })
 
