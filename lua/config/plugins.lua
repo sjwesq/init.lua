@@ -233,7 +233,14 @@ local plugin_list = {
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = true,
+    config = function()
+      local autopairs = require("nvim-autopairs")
+      local rule = require("nvim-autopairs.rule")
+      autopairs.setup()
+      autopairs.add_rules({
+        rule("/*", "*/", { "c", "cpp" }),
+      })
+    end,
   },
   {
     "windwp/nvim-ts-autotag",
