@@ -334,7 +334,6 @@ local plugin_list = {
   },
   {
     "hiphish/rainbow-delimiters.nvim",
-    event = "VeryLazy",
   },
   {
     "brenoprata10/nvim-highlight-colors",
