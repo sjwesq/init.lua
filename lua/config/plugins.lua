@@ -283,6 +283,10 @@ local plugin_list = {
     end,
   },
   {
+    "nvim-mini/mini.comment",
+    config = true,
+  },
+  {
     "alexghergh/nvim-tmux-navigation",
     config = function()
       require("nvim-tmux-navigation").setup({})
