@@ -79,9 +79,9 @@ for i = 1, 8 do
   keymap.set("t", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
   keymap.set("i", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
 end
-keymap.set("n", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
-keymap.set("t", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
-keymap.set("i", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
+keymap.set("n", "<M-9>", "<Cmd>tablast<CR>")
+keymap.set("t", "<M-9>", "<Cmd>tablast<CR>")
+keymap.set("i", "<M-9>", "<Cmd>tablast<CR>")
 
 -- Plugin Bindings ------------------------------------------------------------
 if package.loaded["lazy"] then
