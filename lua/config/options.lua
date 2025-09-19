@@ -1,6 +1,6 @@
 local opt = vim.opt
 
-opt.number = true
+opt.number = false
 
 opt.textwidth = 80
 opt.colorcolumn = "80"

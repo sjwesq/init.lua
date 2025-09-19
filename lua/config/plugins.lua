@@ -300,7 +300,6 @@ local plugin_list = {
   {
     "sainnhe/everforest",
     config = function()
-      vim.g.everforest_diagnostic_virtual_text = "highlighted"
       vim.g.everforest_disable_terminal_colors = 1
       vim.g.everforest_better_performance = 1
       vim.cmd.colorscheme("everforest")
