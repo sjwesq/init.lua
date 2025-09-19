@@ -4,7 +4,7 @@
 local utils = require("config.utils")
 
 local api = vim.api
-local keymap = vim.keymap
+local map = vim.keymap.set
 
 -- Commands -------------------------------------------------------------------
 
@@ -44,106 +44,106 @@ if vim.g.neovide then
 end
 
 -- Keymaps --------------------------------------------------------------------
-keymap.set("n", "<C-m>", "gM")
+map("n", "<C-m>", "gM")
 
-keymap.set("n", "<leader>m", "<Cmd>make<CR>")
-keymap.set("n", "<leader>h", "<Cmd>nohl<CR>")
-keymap.set("n", "<leader>r", vim.lsp.buf.rename)
+map("n", "<leader>m", "<Cmd>make<CR>")
+map("n", "<leader>h", "<Cmd>nohl<CR>")
+map("n", "<leader>r", vim.lsp.buf.rename)
 
 -- Set current directory to file
-keymap.set("n", "<leader>cd", "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
+map("n", "<leader>cd", "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
 
 -- Ctrl-S to save
-keymap.set("i", "<C-s>", "<Cmd>w<CR>")
-keymap.set("n", "<C-s>", "<Cmd>w<CR>")
+map("i", "<C-s>", "<Cmd>w<CR>")
+map("n", "<C-s>", "<Cmd>w<CR>")
 
 -- Buffer closing
-keymap.set("n", "<M-w>", "<Cmd>bd<CR>")
-keymap.set("n", "<M-S-w>", "<Cmd>w|bd<CR>")
+map("n", "<M-w>", "<Cmd>bd<CR>")
+map("n", "<M-S-w>", "<Cmd>w|bd<CR>")
 
 -- Quick window navigation
-keymap.set("n", "<M-h>", "<Cmd>wincmd h<CR>", { silent = true })
-keymap.set("n", "<M-j>", "<Cmd>wincmd j<CR>", { silent = true })
-keymap.set("n", "<M-k>", "<Cmd>wincmd k<CR>", { silent = true })
-keymap.set("n", "<M-l>", "<Cmd>wincmd l<CR>", { silent = true })
-keymap.set("t", "<M-h>", "<Cmd>wincmd h<CR>", { silent = true })
-keymap.set("t", "<M-j>", "<Cmd>wincmd j<CR>", { silent = true })
-keymap.set("t", "<M-k>", "<Cmd>wincmd k<CR>", { silent = true })
-keymap.set("t", "<M-l>", "<Cmd>wincmd l<CR>", { silent = true })
+map("n", "<M-h>", "<Cmd>wincmd h<CR>", { silent = true })
+map("n", "<M-j>", "<Cmd>wincmd j<CR>", { silent = true })
+map("n", "<M-k>", "<Cmd>wincmd k<CR>", { silent = true })
+map("n", "<M-l>", "<Cmd>wincmd l<CR>", { silent = true })
+map("t", "<M-h>", "<Cmd>wincmd h<CR>", { silent = true })
+map("t", "<M-j>", "<Cmd>wincmd j<CR>", { silent = true })
+map("t", "<M-k>", "<Cmd>wincmd k<CR>", { silent = true })
+map("t", "<M-l>", "<Cmd>wincmd l<CR>", { silent = true })
 
-keymap.set("c", "<C-e>", "<End>") -- I think blink breaks this?
+map("c", "<C-e>", "<End>") -- I think blink breaks this?
 
 -- Firefox-style tab switching
 for i = 1, 8 do
-  keymap.set("n", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
-  keymap.set("t", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
-  keymap.set("i", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
+  map("n", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
+  map("t", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
+  map("i", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
 end
-keymap.set("n", "<M-9>", "<Cmd>tablast<CR>")
-keymap.set("t", "<M-9>", "<Cmd>tablast<CR>")
-keymap.set("i", "<M-9>", "<Cmd>tablast<CR>")
+map("n", "<M-9>", "<Cmd>tablast<CR>")
+map("t", "<M-9>", "<Cmd>tablast<CR>")
+map("i", "<M-9>", "<Cmd>tablast<CR>")
 
 -- Plugin Bindings ------------------------------------------------------------
 if package.loaded["lazy"] then
   if utils.is_plugin_registered("mini.files") then
-    keymap.set("n", "<leader>e", MiniFiles.open)
+    map("n", "<leader>e", MiniFiles.open)
   end
 
   if utils.is_plugin_registered("mini.pick") then
-    keymap.set("n", "<leader>f", MiniPick.builtin.files)
+    map("n", "<leader>f", MiniPick.builtin.files)
   end
 
   if utils.is_plugin_registered("nvim-dap") then
-    vim.keymap.set("n", "<F5>", function()
+    map("n", "<F5>", function()
       require("dap").continue()
     end)
-    vim.keymap.set("n", "<F10>", function()
+    map("n", "<F10>", function()
       require("dap").step_into()
     end)
-    vim.keymap.set("n", "<F11>", function()
+    map("n", "<F11>", function()
       require("dap").step_over()
     end)
-    vim.keymap.set("n", "<F12>", function()
+    map("n", "<F12>", function()
       require("dap").step_out()
     end)
-    vim.keymap.set("n", "<leader>db", function()
+    map("n", "<leader>db", function()
       require("dap").toggle_breakpoint()
     end)
-    vim.keymap.set("n", "<leader>dB", function()
+    map("n", "<leader>dB", function()
       require("dap").set_breakpoint()
     end)
-    vim.keymap.set("n", "<leader>dl", function()
+    map("n", "<leader>dl", function()
       require("dap").set_breakpoint(
         nil,
         nil,
         vim.fn.input("Log point message: ")
       )
     end)
-    vim.keymap.set("n", "<leader>dr", function()
+    map("n", "<leader>dr", function()
       require("dap").repl.open()
     end)
-    vim.keymap.set("n", "<leader>da", function()
+    map("n", "<leader>da", function()
       require("dap").run_last()
     end)
   end
 
   if utils.is_plugin_registered("nvim-dap-ui") then
-    vim.keymap.set("n", "<leader>dv", function()
+    map("n", "<leader>dv", function()
       require("dapui").toggle()
     end)
   end
   if utils.is_plugin_registered("nvim-tmux-navigation") then
     local nvim_tmux_nav = require("nvim-tmux-navigation")
-    keymap.set("n", "<M-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
-    keymap.set("n", "<M-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
-    keymap.set("n", "<M-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
-    keymap.set("n", "<M-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
-    keymap.set("n", "<M-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
-    keymap.set("n", "<M-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
-    keymap.set("t", "<M-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
-    keymap.set("t", "<M-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
-    keymap.set("t", "<M-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
-    keymap.set("t", "<M-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+    map("n", "<M-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+    map("n", "<M-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+    map("n", "<M-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+    map("n", "<M-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+    map("n", "<M-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+    map("n", "<M-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+    map("t", "<M-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+    map("t", "<M-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+    map("t", "<M-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+    map("t", "<M-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
   end
 end
 
