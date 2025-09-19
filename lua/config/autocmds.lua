@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
   end,
 })
 
--- Enter insert mode when switching to terminal tab
+-- Enter insert mode when switching to terminal buffer
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "term://*",
   callback = function()
