@@ -75,24 +75,9 @@ keymap.set("c", "<C-e>", "<End>") -- I think blink breaks this?
 
 -- Firefox-style tab switching
 for i = 1, 8 do
-  keymap.set(
-    "n",
-    "<M-" .. i .. ">",
-    "<Cmd>tabnext " .. i .. "<CR>",
-    { silent = true }
-  )
-  keymap.set(
-    "t",
-    "<M-" .. i .. ">",
-    "<Cmd>tabnext " .. i .. "<CR>",
-    { silent = true }
-  )
-  keymap.set(
-    "i",
-    "<M-" .. i .. ">",
-    "<Cmd>tabnext " .. i .. "<CR>",
-    { silent = true }
-  )
+  keymap.set("n", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
+  keymap.set("t", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
+  keymap.set("i", "<M-" .. i .. ">", "<Cmd>tabnext " .. i .. "<CR>")
 end
 keymap.set("n", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
 keymap.set("t", "<M-9>", "<Cmd>tablast<CR>", { silent = true })
