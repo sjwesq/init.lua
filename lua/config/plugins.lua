@@ -3,6 +3,8 @@
 -- The lazy.vim documentation recommended having a separate plugin folder,
 -- but... A single file just loads a bit faster (:
 
+vim.cmd("packadd nohlsearch")
+
 local plugins_dap = {} -- for lazy-loading purposes
 
 local plugin_list = {

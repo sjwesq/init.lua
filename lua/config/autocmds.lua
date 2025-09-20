@@ -12,20 +12,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
-vim.o.updatetime = 300 -- delay before showing hover
-vim.api.nvim_create_autocmd("CursorHold", {
-  callback = function()
-    vim.diagnostic.open_float(nil, {
-      focusable = false,
-      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-      border = "rounded",
-      source = "always",
-      prefix = "",
-      scope = "line",
-    })
-  end,
-})
-
 -- Enter insert mode when switching to terminal buffer
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "term://*",

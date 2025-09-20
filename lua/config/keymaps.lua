@@ -45,9 +45,9 @@ end
 
 -- Keymaps --------------------------------------------------------------------
 map("n", "<C-m>", "gM")
+map("n", "<C-k>", vim.diagnostic.open_float)
 
 map("n", "<leader>m", "<Cmd>make<CR>")
-map("n", "<leader>h", "<Cmd>nohl<CR>")
 map("n", "<leader>r", vim.lsp.buf.rename)
 
 -- Set current directory to file
@@ -91,6 +91,8 @@ if package.loaded["lazy"] then
 
   if utils.is_plugin_registered("mini.pick") then
     map("n", "<leader>f", MiniPick.builtin.files)
+    map("n", "<leader>b", MiniPick.builtin.buffers)
+    map("n", "<leader>h", MiniPick.builtin.help)
   end
 
   if utils.is_plugin_registered("nvim-dap") then

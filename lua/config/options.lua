@@ -29,6 +29,7 @@ opt.virtualedit = "block"
 opt.wildignore = "*.exe,*.dll,*.pdb,*.so"
 opt.completeopt = "menu,menuone,preview,noselect,noinsert"
 opt.splitbelow = true
+opt.updatetime = 2000
 
 opt.undofile = true
 
