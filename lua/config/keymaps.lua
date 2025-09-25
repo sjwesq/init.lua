@@ -57,6 +57,12 @@ map("n", "<leader>cd", "<Cmd>cd %:p:h<CR><Cmd>pwd<CR>")
 map("i", "<C-s>", "<Cmd>w<CR>")
 map("n", "<C-s>", "<Cmd>w<CR>")
 
+-- Goto end of line quickly
+map("i", "<C-l>", "<Esc>A")
+
+-- Function argument update macro
+map("n", "<leader>a", "0f(ya(0t(<C-]>0f(va)p<C-o>")
+
 -- Buffer closing
 map("n", "<M-w>", "<Cmd>bd<CR>")
 map("n", "<M-S-w>", "<Cmd>w|bd<CR>")
