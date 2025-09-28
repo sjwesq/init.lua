@@ -103,23 +103,21 @@ local plugin_list = {
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
-    config = function()
-      require("nvim-treesitter.install").prefer_git = false
-      require("nvim-treesitter.configs").setup({
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        indent = {
-          enable = true,
-        },
-        incremental_selection = {
-          enable = true,
-        },
-
-        auto_install = true,
-      })
-    end,
+    branch = "main",
+    build = ":TSUpdate",
+    opts = {
+      auto_install = true,
+    },
+  },
+  {
+    "MeanderingProgrammer/treesitter-modules.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    ---@module 'treesitter-modules'
+    ---@type ts.mod.UserConfig
+    opts = {
+      auto_install = true,
+      highlight = { enable = true },
+    },
   },
   {
     "folke/lazydev.nvim",
@@ -308,6 +306,7 @@ local plugin_list = {
     config = function()
       vim.g.everforest_disable_terminal_colors = 1
       vim.g.everforest_better_performance = 1
+      vim.g.everforest_transparent_background = 2
       vim.cmd.colorscheme("everforest")
     end,
     priority = 1000, -- ensure this loads first

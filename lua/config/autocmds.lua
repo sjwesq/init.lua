@@ -35,15 +35,6 @@ if package.loaded["lazy"] then
     })
   end
 
-  if utils.is_plugin_registered("nvim-treesitter") then
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "<filetype>" },
-      callback = function()
-        vim.treesitter.start()
-      end,
-    })
-  end
-
   if utils.is_plugin_registered("conform.nvim") then
     vim.api.nvim_create_autocmd("BufWritePre", {
       pattern = "*",
