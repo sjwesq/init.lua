@@ -340,7 +340,7 @@ local plugin_list = {
     end,
   },
   {
-    "hiphish/rainbow-delimiters.nvim",
+    "HiPhish/rainbow-delimiters.nvim",
   },
   {
     "brenoprata10/nvim-highlight-colors",
