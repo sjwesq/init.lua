@@ -95,6 +95,10 @@ map("n", "<M-9>", "<Cmd>tablast<CR>")
 map("t", "<M-9>", "<Cmd>tablast<CR>")
 map("i", "<M-9>", "<Cmd>tablast<CR>")
 
+map("n", "<leader>tn", "<Cmd>tabnew<CR>")
+map("n", "<leader>tc", "<Cmd>tabclose<CR>")
+map("n", "<leader>to", "<Cmd>tabonly<CR>")
+
 -- Plugin Bindings ------------------------------------------------------------
 if package.loaded["lazy"] then
   if utils.is_plugin_registered("mini.files") then
