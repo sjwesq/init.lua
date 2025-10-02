@@ -70,8 +70,7 @@ map("n", "<C-n>", '/<C-r>"<CR>')
 map("n", "<leader>s", ':%s/\\V<C-r>"/')
 
 -- Buffer closing
-map("n", "<M-w>", "<Cmd>bd<CR>")
-map("n", "<M-S-w>", "<Cmd>w|bd<CR>")
+map("n", "<M-w>", "<Cmd>close<CR>")
 
 -- Quick window navigation
 map("n", "<M-h>", "<Cmd>wincmd h<CR>", { silent = true })
