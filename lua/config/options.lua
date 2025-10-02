@@ -24,13 +24,14 @@ opt.spell = true
 opt.spelllang = "en_us"
 opt.spelloptions = "camel"
 opt.wildmenu = true
-opt.hidden = true
+opt.hidden = false
 opt.confirm = true
 opt.virtualedit = "block"
 opt.wildignore = "*.exe,*.dll,*.pdb,*.so"
 opt.completeopt = "menu,menuone,preview,noselect,noinsert"
 opt.splitbelow = true
 opt.updatetime = 2000
+opt.shada = "!,'29,f1,<50,s10,h"
 
 opt.undofile = true
 
