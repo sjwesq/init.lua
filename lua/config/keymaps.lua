@@ -63,6 +63,12 @@ map("i", "<C-l>", "<Esc>A")
 -- Function argument update macro
 map("n", "<leader>a", "0f(ya(0t(<C-]>0f(va)p<C-o>")
 
+-- Search for yanked string macro
+map("n", "<C-n>", '/<C-r>"<CR>')
+
+-- Substitute yanked string macro
+map("n", "<leader>s", ':%s/\\V<C-r>"/')
+
 -- Buffer closing
 map("n", "<M-w>", "<Cmd>bd<CR>")
 map("n", "<M-S-w>", "<Cmd>w|bd<CR>")
