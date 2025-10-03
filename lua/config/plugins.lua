@@ -286,10 +286,10 @@ local plugin_list = {
     end,
   },
   {
-    "nvim-mini/mini.pick",
+    "junegunn/fzf",
     event = "VeryLazy",
-    config = function()
-      require("mini.pick").setup({})
+    build = function()
+      vim.fn["fzf#install"]()
     end,
   },
   {

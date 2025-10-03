@@ -97,16 +97,22 @@ map("i", "<M-9>", "<Cmd>tablast<CR>")
 map("n", "<leader>tn", "<Cmd>tabnew<CR>")
 map("n", "<leader>tc", "<Cmd>tabclose<CR>")
 map("n", "<leader>to", "<Cmd>tabonly<CR>")
+map("n", "<leader>tf", function()
+  vim.cmd("tabnew")
+  utils.cmd_fuzzy_files()
+end)
+map("n", "<leader>tb", function()
+  vim.cmd("tabnew")
+  utils.cmd_fuzzy_buffers()
+end)
+
+map("n", "<leader>zf", utils.cmd_fuzzy_files)
+map("n", "<leader>zb", utils.cmd_fuzzy_buffers)
 
 -- Plugin Bindings ------------------------------------------------------------
 if package.loaded["lazy"] then
   if utils.is_plugin_registered("mini.files") then
-    map("n", "<leader>e", MiniFiles.open)
-  end
-
-  if utils.is_plugin_registered("mini.pick") then
-    map("n", "<leader>f", MiniPick.builtin.files)
-    map("n", "<leader>b", MiniPick.builtin.buffers)
+    map("n", "<leader>f", MiniFiles.open)
   end
 
   if utils.is_plugin_registered("nvim-dap") then
