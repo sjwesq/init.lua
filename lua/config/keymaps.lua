@@ -99,15 +99,17 @@ map("n", "<leader>tc", "<Cmd>tabclose<CR>")
 map("n", "<leader>to", "<Cmd>tabonly<CR>")
 map("n", "<leader>tf", function()
   vim.cmd("tabnew")
-  utils.cmd_fuzzy_files()
+  utils.fuzzy_files()
 end)
 map("n", "<leader>tb", function()
   vim.cmd("tabnew")
-  utils.cmd_fuzzy_buffers()
+  utils.fuzzy_buffers()
 end)
 
-map("n", "<leader>zf", utils.cmd_fuzzy_files)
-map("n", "<leader>zb", utils.cmd_fuzzy_buffers)
+map("n", "<leader>zf", utils.fuzzy_files)
+map("n", "<leader>zb", utils.fuzzy_buffers)
+map("n", "<leader>zh", utils.fuzzy_help)
+map("n", "<leader>zg", utils.fuzzy_live_grep)
 
 -- Plugin Bindings ------------------------------------------------------------
 if package.loaded["lazy"] then
