@@ -69,7 +69,7 @@ function utils.fuzzy_help()
 end
 
 function utils.fuzzy_live_grep()
-  local grep_cmd = "rg --line-number --with-filename --column"
+  local grep_cmd = "rg --line-number --with-filename --column --smart-case"
   local opts = {
     sink = function(result)
       local args = vim.split(result, " ")
