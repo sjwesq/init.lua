@@ -291,6 +291,9 @@ local plugin_list = {
     build = function()
       vim.fn["fzf#install"]()
     end,
+    config = function()
+      vim.env.FZF_DEFAULT_COMMAND = "fd --type f"
+    end,
   },
   {
     "nvim-mini/mini.comment",

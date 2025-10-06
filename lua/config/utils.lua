@@ -79,6 +79,7 @@ function utils.fuzzy_live_grep()
 
       vim.cmd("e " .. filename)
       vim.api.nvim_win_set_cursor(0, { row, column })
+      vim.cmd("norm zz")
     end,
     source = grep_cmd,
     window = win_normal,
