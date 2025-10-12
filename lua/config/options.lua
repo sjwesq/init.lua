@@ -5,6 +5,7 @@ opt.number = false
 opt.textwidth = 80
 opt.colorcolumn = "80"
 opt.termguicolors = true
+opt.winborder = "rounded"
 
 opt.list = false
 opt.listchars = "tab:▸ ,eol:¬,nbsp:␣,extends:›,precedes:‹"
@@ -20,6 +21,7 @@ opt.expandtab = true
 opt.shiftwidth = 2
 opt.softtabstop = 2
 opt.backspace = "indent,eol,start"
+opt.cinoptions = "l1"
 opt.spell = true
 opt.spelllang = "en_us"
 opt.spelloptions = "camel"
