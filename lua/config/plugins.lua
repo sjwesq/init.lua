@@ -202,6 +202,7 @@ local plugin_list = {
       fmt["python"] = { "black" }
       fmt["go"] = { "gofumpt" }
       fmt["tex"] = { "latexindent" }
+      fmt["haskell"] = { "ormolu" }
 
       require("conform").setup({ formatters_by_ft = fmt })
       require("conform").formatters.stylua = {
@@ -273,7 +274,6 @@ local plugin_list = {
       require("mini.splitjoin").setup()
     end,
   },
-  --
   -- }}}
   -- UI Behavior {{{-----------------------------------------------------------
   {
@@ -360,6 +360,12 @@ local plugin_list = {
     end,
   },
 
+  -- }}}
+  -- Language Specific --------------------------------------------------------{{{
+  {
+    "neovimhaskell/haskell-vim",
+    ft = { "haskell" },
+  },
   -- }}}
   -- Only for recordings {{{---------------------------------------------------
   {
