@@ -353,9 +353,6 @@ local plugin_list = {
     "HiPhish/rainbow-delimiters.nvim",
   },
   {
-    "dominikduda/vim_current_word",
-  },
-  {
     "brenoprata10/nvim-highlight-colors",
     ft = { "html", "xml", "conf" },
     config = function()
