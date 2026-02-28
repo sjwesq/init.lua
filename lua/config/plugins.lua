@@ -327,7 +327,7 @@ local plugin_list = {
   {
     "nvim-mini/mini.icons",
     event = "VeryLazy",
-    config = { style = vim.g.enable_nerd_fonts and "default" or "ascii" },
+    opts = { style = vim.g.enable_nerd_fonts and "default" or "ascii" },
   },
   {
     "nvim-mini/mini.statusline",
@@ -351,6 +351,9 @@ local plugin_list = {
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
+  },
+  {
+    "dominikduda/vim_current_word",
   },
   {
     "brenoprata10/nvim-highlight-colors",
