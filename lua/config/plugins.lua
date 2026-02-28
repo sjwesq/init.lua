@@ -354,6 +354,7 @@ local plugin_list = {
   },
   {
     "dominikduda/vim_current_word",
+    event = "VeryLazy",
   },
   {
     "brenoprata10/nvim-highlight-colors",
