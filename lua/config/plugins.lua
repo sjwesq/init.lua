@@ -203,6 +203,7 @@ local plugin_list = {
       fmt["go"] = { "gofumpt" }
       fmt["tex"] = { "latexindent" }
       fmt["haskell"] = { "ormolu" }
+      fmt["cmake"] = { "gersemi" }
 
       require("conform").setup({ formatters_by_ft = fmt })
       require("conform").formatters.stylua = {
@@ -224,6 +225,9 @@ local plugin_list = {
       }
       require("conform").formatters.latexindent = {
         append_args = { "-g", "/dev/null" },
+      }
+      require("conform").formatters.gersemi = {
+        append_args = { "--indent=2" },
       }
     end,
   },
